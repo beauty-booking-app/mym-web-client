@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import heroImg from '../assets/hero.webp'
-import { ArrowDown } from "lucide-react";
+import heroImg from '@/assets/hero.webp'
+import { ArrowDown } from 'lucide-react'
 
 export default function Hero() {
-  const sectionRef = useRef(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const node = sectionRef.current
@@ -68,7 +68,7 @@ export default function Hero() {
             className="reveal font-display font-medium text-foreground text-balance leading-tight"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: "clamp(2.75rem, 7vw, 6rem)",
+              fontSize: 'clamp(2.75rem, 7vw, 6rem)',
             }}
           >
             Elegí estar bien.
@@ -132,7 +132,7 @@ export default function Hero() {
         {/* Scroll cue */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2">
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/60">Descubrí más</span>
-          <ArrowDown className="h-4 w-4 text-primary animate-bounce" style={{ animationDuration: "2.5s" }} />
+          <ArrowDown className="h-4 w-4 text-primary animate-bounce" style={{ animationDuration: '2.5s' }} />
         </div>
         {/* Right column — empty, lets the background show through */}
         <div className="hidden lg:block" aria-hidden="true" />

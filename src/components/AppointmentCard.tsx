@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Calendar, Clock, User, CircleCheck, CircleX, RotateCcw } from 'lucide-react'
-import CancelAppointmentModal from './CancelAppointmentModal'
-import RescheduleModal from './RescheduleModal'
+import type { Appointment, AppointmentStatus } from '@/types/models'
+import CancelAppointmentModal from '@/components/CancelAppointmentModal'
+import RescheduleModal from '@/components/RescheduleModal'
 
-const STATUS_STYLES = {
+const STATUS_STYLES: Record<AppointmentStatus, { bg: string; text: string; border: string; label: string }> = {
   pendiente: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200', label: 'Pendiente' },
   confirmado: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200', label: 'Confirmado' },
   reprogramado: { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200', label: 'Reprogramado' },
@@ -12,7 +13,7 @@ const STATUS_STYLES = {
   no_asiste: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200', label: 'No asistió' },
 }
 
-function formatDateTime(isoString) {
+function formatDateTime(isoString: string): { date: string; time: string } {
   const date = new Date(isoString)
   return {
     date: date.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
@@ -20,25 +21,30 @@ function formatDateTime(isoString) {
   }
 }
 
-function formatPrice(cents) {
+function formatPrice(cents: number): string {
   return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 }).format(cents)
 }
 
-export default function AppointmentCard({ appointment, onUpdate }) {
+interface AppointmentCardProps {
+  appointment: Appointment
+  onUpdate: (appointment: Appointment) => void
+}
+
+export default function AppointmentCard({ appointment, onUpdate }: AppointmentCardProps) {
   const [showCancel, setShowCancel] = useState(false)
   const [showReschedule, setShowReschedule] = useState(false)
 
   const status = STATUS_STYLES[appointment.status] || STATUS_STYLES.pendiente
   const start = formatDateTime(appointment.startTime)
-  const end = formatDateTime(appointment.endTime)
+  const end = formatDateTime(appointment.endTime ?? appointment.startTime)
   const canModify = ['pendiente', 'confirmado', 'reprogramado'].includes(appointment.status)
 
-  const handleCancelled = (updated) => {
+  const handleCancelled = (updated: Appointment) => {
     setShowCancel(false)
     onUpdate(updated)
   }
 
-  const handleRescheduled = (updated) => {
+  const handleRescheduled = (updated: Appointment) => {
     setShowReschedule(false)
     onUpdate(updated)
   }

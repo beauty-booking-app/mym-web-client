@@ -1,12 +1,29 @@
 import { Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useServices } from '../../hooks/useServices'
+import { useServices } from '@/hooks/useServices'
+import type { Appointment, ClientData } from '@/types/models'
 
-function formatPrice(n) {
+function formatPrice(n: number): string {
   return n.toLocaleString('es-AR')
 }
 
-export default function StepConfirm({ services, date, time, client, appointment, onGoHome }) {
+interface StepConfirmProps {
+  services: string[]
+  date: string
+  time: string
+  client: ClientData
+  appointment: Appointment | null
+  onGoHome: () => void
+}
+
+export default function StepConfirm({
+  services,
+  date,
+  time,
+  client,
+  appointment,
+  onGoHome,
+}: StepConfirmProps) {
   const { allTypes } = useServices()
   const selectedTypes = allTypes.filter((t) => services.includes(t.id))
   const totalPrice = selectedTypes.reduce((sum, t) => sum + t.price, 0)

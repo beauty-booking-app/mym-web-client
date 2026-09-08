@@ -1,5 +1,17 @@
 # Registro de cambios
 
+## 11 · Migración JS/JSX → TypeScript
+
+- Creado `src/types/`: `models.ts` (Service, ServiceType, Category, Appointment, estados), `api.ts` (payloads/respuestas de la API + clase `ApiError` con códigos `NotFound`/`ContactMismatch`/`CannotCancel`/`CannotReschedule`/`SlotUnavailable`) y `context.ts` (valor tipado del `ServicesContext`). Shapes alineados con los schemas del backend (`mym-api-backend/app/schemas/*`, camelCase).
+- Migrados a `.tsx`/`.ts` todos los archivos de `src/`: `App`, `main`, `router/AppRouter`, `pages/`, `components/` (incluyendo `booking/*`), `context/`, `hooks/useServices`, `lib/clientToken`, `services/api`. No quedan `.js`/`.jsx` en `src/`.
+- Tipado de componentes: props con interfaces, eventos (`FormEvent`, `KeyboardEvent`), refs explícitos (`HTMLElement`/`HTMLInputElement`/`HTMLDivElement`) e íconos `LucideIcon`. `StepClient` ahora usa `z.infer<typeof schema>` como genérico de `useForm`.
+- Tipado de `services/api.ts`: `fetchServices: Promise<Service[]>`, `fetchAvailableDates`/`fetchSlots` tipan respuestas del backend, `validateSlot` lanza `ApiError` con código `SlotUnavailable`, y las funciones públicas (`by-human-id`, cancelar, reprogramar) lanzan `ApiError` (`NotFound`, `ContactMismatch`, `CannotCancel`, `CannotReschedule`).
+- Creado `src/vite-env.d.ts`: referencia a `vite/client` y tipado de `ImportMetaEnv` (`VITE_API_URL`, `VITE_CLIENT_TOKEN_SECRET`) — antes `import.meta.env` era `any`.
+- Creado `tsconfig.json`: `strict`, `moduleResolution: "bundler"`, `jsx: "react-jsx"`, `paths` alias `@/*`.
+- Configurado el alias `@/` en `vite.config.js` (`resolve.alias`) y usados imports con `@/` en todo `src/` (convención de la constitución).
+- Punto de entrada: `index.html` ahora apunta a `/src/main.tsx`.
+- ESLint: instalado `typescript-eslint` (dev dep) y actualizado `eslint.config.js` para lintear `*.{ts,tsx}` además de `*.{js,jsx}`. Nota: como typescript-eslint 8.x no soporta TS 7.0 (no expone API estable aún), `typescript` pasa a `npm:@typescript/typescript6@^6.0.2` (paquete de compatibilidad oficial de TS) y `typecheck` usa `tsc6 --noEmit` (mismo motor TS 6). `pnpm typecheck`, `pnpm lint` y `pnpm build` en verde.
+
 ## 01 · Landing page
 
 - Configurado Tailwind CSS 4 como plugin de Vite (`@tailwindcss/vite`).

@@ -1,8 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { AlertTriangle } from 'lucide-react'
 
-export default function SlotUnavailableModal({ open, onReschedule, onCancel }) {
-  const dialogRef = useRef(null)
+interface SlotUnavailableModalProps {
+  open: boolean
+  onReschedule: () => void
+  onCancel: () => void
+}
+
+export default function SlotUnavailableModal({
+  open,
+  onReschedule,
+  onCancel,
+}: SlotUnavailableModalProps) {
+  const dialogRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (!open) return
@@ -11,7 +21,7 @@ export default function SlotUnavailableModal({ open, onReschedule, onCancel }) {
 
   useEffect(() => {
     if (!open) return
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onCancel()
     }
     document.addEventListener('keydown', handleKey)

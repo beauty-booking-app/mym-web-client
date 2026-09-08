@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useServices } from '../hooks/useServices'
-import { Plus, Check, MoveRight } from "lucide-react";
+import { useServices } from '@/hooks/useServices'
+import { Plus, Check, MoveRight } from 'lucide-react'
 
-function formatPrice(n) {
+function formatPrice(n: number): string {
   return n.toLocaleString('es-AR')
 }
 
 export default function ServiceCatalog() {
   const { categories, loading, selectedTypes, toggleType } = useServices()
-  const sectionRef = useRef(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const node = sectionRef.current
@@ -174,7 +174,7 @@ export default function ServiceCatalog() {
             }
             aria-disabled={selectedTypes.length === 0}
           >
-            <span className='flex gap-2 items-center'>
+            <span className="flex gap-2 items-center">
               Reservar turno
               <MoveRight className="h-4 w-4" />
             </span>

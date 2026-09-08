@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { Scissors, Palette, Heart } from "lucide-react";
+import { Scissors, Palette, Heart, type LucideIcon } from 'lucide-react'
 
-const CARDS = [
+const CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
   {
     icon: Scissors,
     title: 'Peluquería',
@@ -20,7 +20,7 @@ const CARDS = [
 ]
 
 export default function About() {
-  const sectionRef = useRef(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const node = sectionRef.current
@@ -33,7 +33,7 @@ export default function About() {
             entry.target.classList.add('revealed')
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
-                entry.target.style.transitionDelay = '0ms'
+                ;(entry.target as HTMLElement).style.transitionDelay = '0ms'
               })
             })
           }
@@ -66,12 +66,12 @@ export default function About() {
           >
             Sobre nosotros
           </p>
-          <h2 
+          <h2
             className="reveal font-display font-medium text-4xl sm:text-5xl leading-[1.05] text-balance mb-8"
             style={{
-                fontFamily: 'var(--font-display)',
-                transitionDelay: '100ms',
-              }}
+              fontFamily: 'var(--font-display)',
+              transitionDelay: '100ms',
+            }}
           >
             Excelencia en cada detalle
           </h2>

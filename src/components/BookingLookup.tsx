@@ -1,21 +1,23 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { Search } from 'lucide-react'
-import { fetchAppointmentByHumanId } from '../services/api'
-import AppointmentCard from './AppointmentCard'
+import { fetchAppointmentByHumanId } from '@/services/api'
+import { ApiError } from '@/types/api'
+import type { Appointment } from '@/types/models'
+import AppointmentCard from '@/components/AppointmentCard'
 
 export default function BookingLookup() {
   const [humanId, setHumanId] = useState('')
-  const [appointment, setAppointment] = useState(null)
+  const [appointment, setAppointment] = useState<Appointment | null>(null)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [notFound, setNotFound] = useState(false)
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const value = humanId.trim().toUpperCase()
     if (!value) return
@@ -29,17 +31,17 @@ export default function BookingLookup() {
       const result = await fetchAppointmentByHumanId(value)
       setAppointment(result)
     } catch (err) {
-      if (err.code === 'NotFound') {
+      if (err instanceof ApiError && err.code === 'NotFound') {
         setNotFound(true)
       } else {
-        setError(err.message || 'Error al buscar el turno')
+        setError(err instanceof Error ? err.message : 'Error al buscar el turno')
       }
     } finally {
       setLoading(false)
     }
   }
 
-  const handleAppointmentUpdate = (updated) => {
+  const handleAppointmentUpdate = (updated: Appointment) => {
     setAppointment(updated)
   }
 

@@ -1,6 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
-import { fetchServices } from '../services/api'
-import { ServicesContext } from './servicesContext'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { fetchServices } from '@/services/api'
+import { ServicesContext } from '@/context/servicesContext'
+import type {
+  Category,
+  Service,
+  ServiceTypeWithDetails,
+} from '@/types/models'
 
 // El backend real no expone `category`/`pillar` (metadata local del mock).
 // Se derivan del nombre del Service para que funcione con datos reales.
@@ -11,7 +16,7 @@ const CATEGORIAS_POR_NOMBRE = [
   { match: 'UÑAS', label: 'Uñas', pillar: 'Uñas' },
 ]
 
-function categoriaDeService(svc) {
+function categoriaDeService(svc: Service): { label: string; pillar: string } {
   if (svc.category) {
     return { label: svc.category, pillar: svc.pillar || svc.category }
   }
@@ -22,13 +27,13 @@ function categoriaDeService(svc) {
   return match ?? { label: svc.name || 'Servicio', pillar: svc.name || 'Servicio' }
 }
 
-export function ServicesProvider({ children }) {
-  const [services, setServices] = useState([])
-  const [selectedTypes, setSelectedTypes] = useState([])
+export function ServicesProvider({ children }: { children: ReactNode }) {
+  const [services, setServices] = useState<Service[]>([])
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<unknown>(null)
 
-  const toggleType = (typeId) => {
+  const toggleType = (typeId: string) => {
     setSelectedTypes((prev) =>
       prev.includes(typeId) ? prev.filter((t) => t !== typeId) : [...prev, typeId],
     )
@@ -56,8 +61,8 @@ export function ServicesProvider({ children }) {
 
   // Derivar categorías a partir de los services (campo `category` del mock
   // o nombre del Service cuando viene del backend real)
-  const categories = useMemo(() => {
-    const map = new Map()
+  const categories = useMemo<Category[]>(() => {
+    const map = new Map<string, Category>()
     services.forEach((svc) => {
       const { label, pillar } = categoriaDeService(svc)
       if (!map.has(label)) {
@@ -70,13 +75,13 @@ export function ServicesProvider({ children }) {
           services: [],
         })
       }
-      map.get(label).services.push(svc)
+      map.get(label)?.services.push(svc)
     })
     return Array.from(map.values())
   }, [services])
 
   // Lista plana de todos los ServiceType con referencia a su Service
-  const allTypes = useMemo(
+  const allTypes = useMemo<ServiceTypeWithDetails[]>(
     () =>
       services.flatMap((svc) =>
         svc.types.map((t) => ({

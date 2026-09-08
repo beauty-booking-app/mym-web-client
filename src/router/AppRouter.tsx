@@ -1,8 +1,8 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import LandingPage from '../pages/LandingPage'
+import LandingPage from '@/pages/LandingPage'
 
-const MyBookingsPage = lazy(() => import('../pages/MyBookingsPage'))
+const MyBookingsPage = lazy(() => import('@/pages/MyBookingsPage'))
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()

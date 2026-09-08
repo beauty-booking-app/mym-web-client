@@ -1,12 +1,31 @@
 import { useState, useEffect } from 'react'
 import { Calendar, Clock, MoveRight, MoveLeft } from 'lucide-react'
-import { useServices } from '../../hooks/useServices'
-import { fetchAvailableDates, fetchSlots } from '../../services/api'
+import { useServices } from '@/hooks/useServices'
+import { fetchAvailableDates, fetchSlots } from '@/services/api'
+import type { Slot } from '@/types/api'
 
-export default function StepDateTime({ serviceTypeIds, date, time, onDate, onTime, onNext, onBack }) {
+interface StepDateTimeProps {
+  serviceTypeIds: string[]
+  date: string | null
+  time: string | null
+  onDate: (date: string) => void
+  onTime: (time: string) => void
+  onNext: () => void
+  onBack: () => void
+}
+
+export default function StepDateTime({
+  serviceTypeIds,
+  date,
+  time,
+  onDate,
+  onTime,
+  onNext,
+  onBack,
+}: StepDateTimeProps) {
   const { loading: servicesLoading } = useServices()
-  const [availableDates, setAvailableDates] = useState(null)
-  const [slots, setSlots] = useState({ date: null, data: null })
+  const [availableDates, setAvailableDates] = useState<string[] | null>(null)
+  const [slots, setSlots] = useState<{ date: string | null; data: Slot[] | null }>({ date: null, data: null })
   const canNext = date && time
 
   // Cargar días disponibles cuando se seleccionan los serviceTypes
@@ -123,7 +142,7 @@ export default function StepDateTime({ serviceTypeIds, date, time, onDate, onTim
             <p className="text-foreground/50 font-mono text-xs uppercase tracking-wide py-8 text-center">Cargando horarios...</p>
           ) : (
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
-              {currentSlots.filter((s) => s.available).map((slot) => {
+              {currentSlots?.filter((s) => s.available).map((slot) => {
                 const isSelected = time === slot.startTime
                 return (
                   <button
@@ -152,7 +171,7 @@ export default function StepDateTime({ serviceTypeIds, date, time, onDate, onTim
           onClick={onBack}
           className="font-mono text-[10px] uppercase tracking-wide font-semibold text-foreground/60 hover:text-foreground transition-colors flex items-center gap-2 cursor-pointer"
         >
-          <MoveLeft className="h-3 w-3 animate-bounce" style={{ animationDuration: "2.5s" }} />
+          <MoveLeft className="h-3 w-3 animate-bounce" style={{ animationDuration: '2.5s' }} />
           Atrás
         </button>
 
@@ -162,7 +181,7 @@ export default function StepDateTime({ serviceTypeIds, date, time, onDate, onTim
           className="font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-8 py-3.5 rounded-full bg-primary text-background hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 cursor-pointer"
         >
           Siguiente
-          <MoveRight className="h-4 w-4 animate-bounce" style={{ animationDuration: "2.5s" }} />
+          <MoveRight className="h-4 w-4 animate-bounce" style={{ animationDuration: '2.5s' }} />
         </button>
       </div>
     </div>

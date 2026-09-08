@@ -1,6 +1,6 @@
 # 11 · Migración JS/JSX → TypeScript — Plan
 
-**Estado:** propuesta (pendiente de aprobación)
+**Estado:** implementado
 
 ## Objetivo técnico
 

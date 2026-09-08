@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { User, MoveLeft } from 'lucide-react'
+import type { ClientData } from '@/types/models'
 
 const schema = z.object({
   name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
@@ -9,18 +10,34 @@ const schema = z.object({
   email: z.string().email('Ingresá un email válido'),
 })
 
-export default function StepClient({ client, onChange, onNext, onBack, submitting = false, error = null }) {
+interface StepClientProps {
+  client: ClientData
+  onChange: (client: ClientData) => void
+  onNext: (client: ClientData) => void
+  onBack: () => void
+  submitting?: boolean
+  error?: string | null
+}
+
+export default function StepClient({
+  client,
+  onChange,
+  onNext,
+  onBack,
+  submitting = false,
+  error = null,
+}: StepClientProps) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: client,
   })
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: z.infer<typeof schema>) => {
     onChange(data)
     onNext(data)
   }
@@ -128,7 +145,7 @@ export default function StepClient({ client, onChange, onNext, onBack, submittin
             disabled={submitting}
             className="font-mono text-[10px] uppercase tracking-wide font-semibold text-foreground/60 hover:text-foreground transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <MoveLeft className="h-3 w-3 animate-bounce" style={{ animationDuration: "2.5s" }} />
+            <MoveLeft className="h-3 w-3 animate-bounce" style={{ animationDuration: '2.5s' }} />
             Atrás
           </button>
 

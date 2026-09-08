@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Check } from 'lucide-react'
-import { useServices } from '../hooks/useServices'
-import StepServices from '../components/booking/StepServices'
-import StepDateTime from '../components/booking/StepDateTime'
-import StepClient from '../components/booking/StepClient'
-import StepConfirm from '../components/booking/StepConfirm'
-import SlotUnavailableModal from '../components/booking/SlotUnavailableModal'
-import { createAppointment, validateSlot } from '../services/api'
+import { useServices } from '@/hooks/useServices'
+import StepServices from '@/components/booking/StepServices'
+import StepDateTime from '@/components/booking/StepDateTime'
+import StepClient from '@/components/booking/StepClient'
+import StepConfirm from '@/components/booking/StepConfirm'
+import SlotUnavailableModal from '@/components/booking/SlotUnavailableModal'
+import { createAppointment, validateSlot } from '@/services/api'
+import { ApiError } from '@/types/api'
+import type { Appointment, ClientData } from '@/types/models'
 
 const STEPS = [
   { id: 1, label: 'Servicios' },
@@ -17,12 +19,12 @@ const STEPS = [
 export default function BookingSection() {
   const { selectedTypes, toggleType, clearSelectedTypes } = useServices()
   const [step, setStep] = useState(1)
-  const [date, setDate] = useState(null)
-  const [time, setTime] = useState(null)
-  const [client, setClient] = useState({ name: '', phone: '', email: '' })
+  const [date, setDate] = useState<string | null>(null)
+  const [time, setTime] = useState<string | null>(null)
+  const [client, setClient] = useState<ClientData>({ name: '', phone: '', email: '' })
   const [submitting, setSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState(null)
-  const [appointment, setAppointment] = useState(null)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [appointment, setAppointment] = useState<Appointment | null>(null)
   const [slotUnavailable, setSlotUnavailable] = useState(false)
 
   const goNext = () => setStep((s) => Math.min(s + 1, 4))
@@ -31,8 +33,9 @@ export default function BookingSection() {
     setStep((s) => Math.max(s - 1, 1))
   }
 
-  const handleConfirm = async (clientData) => {
+  const handleConfirm = async (clientData: ClientData) => {
     if (submitting) return
+    if (!date || !time) return
     setSubmitting(true)
     setSubmitError(null)
     try {
@@ -48,10 +51,10 @@ export default function BookingSection() {
       setAppointment(created)
       setStep(4)
     } catch (err) {
-      if (err.code === 'SlotUnavailable') {
+      if (err instanceof ApiError && err.code === 'SlotUnavailable') {
         setSlotUnavailable(true)
       } else {
-        setSubmitError(err.message || 'No se pudo crear la cita. Intentá de nuevo.')
+        setSubmitError(err instanceof Error ? err.message : 'No se pudo crear la cita. Intentá de nuevo.')
       }
     } finally {
       setSubmitting(false)
@@ -156,8 +159,8 @@ export default function BookingSection() {
         {step === 4 && (
           <StepConfirm
             services={selectedTypes}
-            date={date}
-            time={time}
+            date={date ?? ''}
+            time={time ?? ''}
             client={client}
             appointment={appointment}
             onGoHome={handleGoHome}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import BookingLookup from '../components/BookingLookup'
+import Navbar from '@/components/Navbar'
+import BookingLookup from '@/components/BookingLookup'
 
 export default function MyBookingsPage() {
   return (

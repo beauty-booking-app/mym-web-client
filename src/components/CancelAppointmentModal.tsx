@@ -1,17 +1,31 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { CircleX } from 'lucide-react'
-import { cancelAppointmentByHumanId } from '../services/api'
+import { cancelAppointmentByHumanId } from '@/services/api'
+import { ApiError } from '@/types/api'
+import type { Appointment } from '@/types/models'
 
-function isEmail(value) {
+function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
-export default function CancelAppointmentModal({ open, humanId, onClose, onConfirmed }) {
+interface CancelAppointmentModalProps {
+  open: boolean
+  humanId: string
+  onClose: () => void
+  onConfirmed: (appointment: Appointment) => void
+}
+
+export default function CancelAppointmentModal({
+  open,
+  humanId,
+  onClose,
+  onConfirmed,
+}: CancelAppointmentModalProps) {
   const [reason, setReason] = useState('')
   const [contactValue, setContactValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const dialogRef = useRef(null)
+  const [error, setError] = useState<string | null>(null)
+  const dialogRef = useRef<HTMLDivElement | null>(null)
   const prevOpen = useRef(false)
 
   useEffect(() => {
@@ -23,7 +37,7 @@ export default function CancelAppointmentModal({ open, humanId, onClose, onConfi
 
   useEffect(() => {
     if (!open) return
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKey)
@@ -37,7 +51,7 @@ export default function CancelAppointmentModal({ open, humanId, onClose, onConfi
     onClose()
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const contact = contactValue.trim()
     if (!contact) return
@@ -56,12 +70,13 @@ export default function CancelAppointmentModal({ open, humanId, onClose, onConfi
       })
       onConfirmed(updated)
     } catch (err) {
-      if (err.code === 'ContactMismatch') {
+      if (err instanceof ApiError && err.code === 'ContactMismatch') {
         setError('El dato de contacto no coincide con el registrado.')
-      } else if (err.code === 'CannotCancel') {
-        setError(err.details?.services?.[0]?.reason || 'Este turno no se puede cancelar en este momento.')
+      } else if (err instanceof ApiError && err.code === 'CannotCancel') {
+        const details = err.details as { services?: { reason?: string }[] } | undefined
+        setError(details?.services?.[0]?.reason || 'Este turno no se puede cancelar en este momento.')
       } else {
-        setError(err.message || 'No se pudo cancelar el turno.')
+        setError(err instanceof Error ? err.message : 'No se pudo cancelar el turno.')
       }
     } finally {
       setLoading(false)
@@ -147,7 +162,6 @@ export default function CancelAppointmentModal({ open, humanId, onClose, onConfi
             >
               {loading ? 'Cancelando…' : 'Cancelar turno'}
             </button>
-            
           </div>
         </form>
       </div>

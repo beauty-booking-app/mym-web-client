@@ -1,25 +1,41 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { RotateCcw } from 'lucide-react'
-import { rescheduleAppointmentByHumanId } from '../services/api'
+import { rescheduleAppointmentByHumanId } from '@/services/api'
+import { ApiError } from '@/types/api'
+import type { Appointment } from '@/types/models'
 
-function isEmail(value) {
+function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
-function parseStartTime(isoString) {
+function parseStartTime(isoString: string): { date: string; time: string } {
   if (!isoString) return { date: '', time: '' }
   const dt = new Date(isoString)
   return { date: dt.toISOString().slice(0, 10), time: dt.toISOString().slice(11, 16) }
 }
 
-export default function RescheduleModal({ open, humanId, currentStartTime, onClose, onConfirmed }) {
+interface RescheduleModalProps {
+  open: boolean
+  humanId: string
+  currentStartTime: string
+  onClose: () => void
+  onConfirmed: (appointment: Appointment) => void
+}
+
+export default function RescheduleModal({
+  open,
+  humanId,
+  currentStartTime,
+  onClose,
+  onConfirmed,
+}: RescheduleModalProps) {
   const initial = parseStartTime(currentStartTime)
   const [date, setDate] = useState(initial.date)
   const [startTime, setStartTime] = useState(initial.time)
   const [contactValue, setContactValue] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const dialogRef = useRef(null)
+  const [error, setError] = useState<string | null>(null)
+  const dialogRef = useRef<HTMLDivElement | null>(null)
   const prevOpen = useRef(false)
 
   useEffect(() => {
@@ -31,7 +47,7 @@ export default function RescheduleModal({ open, humanId, currentStartTime, onClo
 
   useEffect(() => {
     if (!open) return
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKey)
@@ -47,7 +63,7 @@ export default function RescheduleModal({ open, humanId, currentStartTime, onClo
     onClose()
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const contact = contactValue.trim()
     if (!date || !startTime || !contact) return
@@ -67,14 +83,14 @@ export default function RescheduleModal({ open, humanId, currentStartTime, onClo
       })
       onConfirmed(updated)
     } catch (err) {
-      if (err.code === 'ContactMismatch') {
+      if (err instanceof ApiError && err.code === 'ContactMismatch') {
         setError('El dato de contacto no coincide con el registrado.')
-      } else if (err.code === 'SlotUnavailable') {
+      } else if (err instanceof ApiError && err.code === 'SlotUnavailable') {
         setError('Ese horario ya no está disponible. Elegí otro.')
-      } else if (err.code === 'CannotReschedule') {
+      } else if (err instanceof ApiError && err.code === 'CannotReschedule') {
         setError('Este turno no se puede reprogramar (está cancelado o completado).')
       } else {
-        setError(err.message || 'No se pudo reprogramar el turno.')
+        setError(err instanceof Error ? err.message : 'No se pudo reprogramar el turno.')
       }
     } finally {
       setLoading(false)
@@ -176,7 +192,6 @@ export default function RescheduleModal({ open, humanId, currentStartTime, onClo
             >
               {loading ? 'Reprogramando…' : 'Reprogramar'}
             </button>
-            
           </div>
         </form>
       </div>

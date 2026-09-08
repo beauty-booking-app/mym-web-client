@@ -1,9 +1,9 @@
-import { useServices } from '../hooks/useServices';
-import { Mail, MapPin, Clock, Phone } from "lucide-react";
-import logo from '../assets/logo.png'
+import { useServices } from '@/hooks/useServices'
+import { Mail, MapPin, Clock, Phone } from 'lucide-react'
+import logo from '@/assets/logo.png'
 
 export default function Footer() {
-  const { categories: SERVICE_CATEGORIES } = useServices();
+  const { categories: SERVICE_CATEGORIES } = useServices()
   return (
     <footer
       role="contentinfo"
@@ -37,7 +37,7 @@ export default function Footer() {
             {SERVICE_CATEGORIES.map((cat) => (
               <li key={cat.id}>
                 <a
-                  href={`#catalogo`}
+                  href="#catalogo"
                   aria-label={`Ver servicios de ${cat.label}`}
                   className="text-sm transition-colors"
                 >
@@ -61,11 +61,11 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <MapPin className="h-4 w-4 text-primary" strokeWidth={1.5} />
               <span>Av. Principal 1234<br />Buenos Aires</span>
-              </li>
+            </li>
             <li className="flex items-center gap-3">
               <Clock className="h-4 w-4 text-primary" strokeWidth={1.5} />
               <span>Lun a Sáb: 9 a 19 hs</span>
-              </li>
+            </li>
           </ul>
         </div>
 
@@ -90,7 +90,6 @@ export default function Footer() {
               >
                 @MyM
               </a>
-              
             </li>
 
             <li className="flex items-center gap-3">

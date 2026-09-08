@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
 import { AlertTriangle, X } from 'lucide-react'
 
-export default function Toast({ message, onClose, duration = 5000 }) {
+interface ToastProps {
+  message: string | null
+  onClose: () => void
+  duration?: number
+}
+
+export default function Toast({ message, onClose, duration = 5000 }: ToastProps) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {

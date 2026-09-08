@@ -14,25 +14,26 @@
 
 ## Archivos / módulos clave
 
-- `src/main.jsx` — Punto de entrada: renderiza `<App />` en el DOM.
-- `src/App.jsx` — Componente raíz: importa y renderiza las secciones de la landing (Hero, About).
-- `src/components/Hero.jsx` — Sección hero full-screen: imagen difuminada, overlay cálido, grid 2 columnas, CTA.
-- `src/components/About.jsx` — Sección About: fondo crema, layout asimétrico, tarjetas con íconos.
-- `src/components/ServiceCatalog.jsx` — Catálogo de servicios: pestañas por categoría, imagen dinámica, lista de servicios.
-- `src/components/PreFooterBanner.jsx` — Banner CTA: fondo terracota, volanta + título, botón "Reservá tu turno".
-- `src/components/Footer.jsx` — Footer: fondo marrón oscuro, grilla 4 columnas, barra inferior.
-- `src/components/booking/StepServices.jsx` — Paso 1 del wizard: selección de servicios.
-- `src/components/booking/StepDateTime.jsx` — Paso 2 del wizard: selección de fecha/hora.
-- `src/components/booking/StepClient.jsx` — Paso 3 del wizard: formulario con Zod.
-- `src/components/booking/StepConfirm.jsx` — Confirmación del turno.
-- `src/pages/LandingPage.jsx` — Página de la landing page.
-- `src/pages/BookingPage.jsx` — Página del wizard de reserva.
-- `src/pages/MyBookingsPage.jsx` — Página de consulta de turnos por código de seguimiento.
-- `src/components/BookingLookup.jsx` — Formulario de búsqueda + tarjeta de resultado del turno.
-- `src/router/AppRouter.jsx` — Configuración de rutas (React Router).
-- `src/components/Navbar.jsx` — Nav fijo flotante: botones "Mis turnos" y "RESERVAR".
-- `src/lib/services.js` — Catálogo estático de servicios: 4 categorías, 16 servicios, time slots.
-- `src/entities/Appointment.jsonc` — Schema JSON de la entidad Appointment.
+- `src/main.tsx` — Punto de entrada: renderiza `<App />` en el DOM.
+- `src/App.tsx` — Componente raíz: `<ServicesProvider>` + `<AppRouter />`.
+- `src/components/Hero.tsx` — Sección hero full-screen: imagen difuminada, overlay cálido, grid 2 columnas, CTA.
+- `src/components/About.tsx` — Sección About: fondo crema, layout asimétrico, tarjetas con íconos.
+- `src/components/ServiceCatalog.tsx` — Catálogo de servicios: grid de tarjetas por categoría con selección múltiple.
+- `src/components/PreFooterBanner.tsx` — Banner CTA: fondo terracota, volanta + título, botón "Reservá tu turno".
+- `src/components/Footer.tsx` — Footer: fondo marrón oscuro, grilla 4 columnas, barra inferior.
+- `src/components/BookingSection.tsx` — Sección de reserva (`#reserva`): wizard de 3 pasos + confirmación.
+- `src/components/booking/Step*.tsx` — Pasos del wizard (servicios, fecha/hora, datos con Zod, confirmación).
+- `src/pages/LandingPage.tsx` — Página de la landing (scroll único).
+- `src/pages/MyBookingsPage.tsx` — Página de consulta de turnos por código de seguimiento.
+- `src/components/BookingLookup.tsx` — Formulario de búsqueda + tarjeta de resultado del turno.
+- `src/router/AppRouter.tsx` — Configuración de rutas (React Router), lazy loading de `/mis-turnos`.
+- `src/components/Navbar.tsx` — Nav fijo flotante: botones "Mis turnos" y "RESERVAR".
+- `src/context/ServicesContext.tsx` — Proveedor de servicios + selección compartida (persistido en memoria).
+- `src/hooks/useServices.ts` — Hook para consumir el `ServicesContext`.
+- `src/services/api.ts` — Cliente HTTP tipado (disponibilidad, citas, consulta/cancelación/reprogramación).
+- `src/lib/clientToken.ts` — Token de reserva anónima (JWT HS256 con Web Crypto).
+- `src/types/` — Interfaces TS compartidas (`models.ts`, `api.ts`, `context.ts`, `vite-env.d.ts`).
+- `src/entities/Appointment.jsonc` — Schema JSON de la entidad Appointment (referencia).
 - `src/index.css` — Estilos globales: Tailwind import, tokens CSS (paleta, tipografía), utilidades `.reveal`, `.lift-card`.
 
 ## Comandos
@@ -41,9 +42,9 @@
 pnpm dev        # arranca el dev server de Vite
 pnpm build      # compila para producción
 pnpm start      # sirve la build de producción (alias de preview)
-pnpm lint       # revisa estilo con ESLint
+pnpm lint       # revisa estilo con ESLint (JS y TS via typescript-eslint)
 pnpm lint:fix   # corrige automáticamente lo que pueda
-pnpm typecheck  # chequeo de tipos con TypeScript (solo lectura, no compila)
+pnpm typecheck  # chequeo de tipos (tsc6 --noEmit, TypeScript 6 por compatibilidad con typescript-eslint)
 pnpm preview    # vista previa de la build de producción
 ```
 
@@ -62,17 +63,18 @@ pnpm preview    # vista previa de la build de producción
 | `notes` | string | Opcional. Comentarios o preferencias. |
 | `status` | enum | `pending` / `confirmed` / `cancelled`. Default: `pending`. |
 
-### Catálogo de servicios (estático en `services.js`)
+### Catálogo de servicios (cargado desde el backend vía `GET /public/services`)
 
-Cada categoría tiene: `id`, `label`, `pillar`, `description`, `image`, `texture` y un array de `services` (cada uno con `id`, `name`, `desc`). Los services se aplanan en `ALL_SERVICES` agregando `category` y `categoryId`.
+Cada `Service` tiene: `id`, `name`, `description`, `referenceImage`, `cancelable`, `cancellationPeriodHours` y un array de `types` (cada uno con `id`, `name`, `description`, `durationMinutes`, `price`). El `ServicesContext` deriva las **categorías** (Corte, Tratamientos, Color, Uñas) del nombre del service o del campo `category` del mock, y expone la lista plana `allTypes`.
 
 `TIME_SLOTS`: 10 turnos horarios de 09:00 a 19:00, sin 13:00.
 
 ## Convenciones
 
 - **Idioma:** todo el contenido visible al usuario en español argentino.
-- **Nombres de archivos:** componentes en PascalCase (`BookingEngine.jsx`), utilidades en kebab-case (`app-params.js`), hooks en kebab-case con prefijo `use-` (`use-mobile.jsx`).
-- **Imports:** usar alias `@/` mapeado en `tsconfig.json` (ej. `@/components/ui/button`, `@/lib/services`).
+- **Idioma del código:** TypeScript estricto. Sin `any` sin justificar.
+- **Nombres de archivos:** componentes en PascalCase (`BookingEngine.tsx`), utilidades en kebab-case (`client-token.ts`), hooks en kebab-case con prefijo `use-` (`use-services.ts`).
+- **Imports:** usar alias `@/` mapeado en `tsconfig.json` (paths) y `vite.config.js` (resolve.alias) (ej. `@/components/booking/StepClient`, `@/services/api`).
 - **Formularios:** React Hook Form + Zod (paquetes ya instalados: `react-hook-form`, `zod`, `@hookform/resolvers`).
 - **Estilos:** Tailwind CSS 4 utility-first vía `@tailwindcss/vite`. No hay CSS modules ni styled-components.
 - **Accesibilidad:** `aria-label`, `aria-pressed`, `aria-modal`, `role="dialog"`, targets mínimo 44px, `prefers-reduced-motion` respetado.
@@ -95,4 +97,4 @@ Cada categoría tiene: `id`, `label`, `pillar`, `description`, `image`, `texture
 - No romper la paleta ni la tipografía sin actualizar las variables CSS en `index.css`.
 - No desactivar la accesibilidad (targets 44px, aria labels, reduced-motion).
 - No cambiar el idioma del contenido visible al usuario (siempre español argentino).
-- No montar rutas nuevas sin verificar que el componente esté importado en `App.jsx`.
+- No montar rutas nuevas sin verificar que el componente esté importado en `App.tsx`.

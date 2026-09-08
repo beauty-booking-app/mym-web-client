@@ -1,6 +1,6 @@
 # 11 · Migración JS/JSX → TypeScript
 
-**Estado:** propuesta (pendiente de aprobación)
+**Estado:** aprobado
 
 ## Contexto
 
@@ -22,14 +22,14 @@ El repositorio declara TypeScript en la constitución (`tech-stack.md`), pero pa
 
 ## Criterios de aceptación
 
-- [ ] El código fuente pasa de `.jsx`/`.js` a `.tsx`/`.ts` donde corresponda.
-- [ ] Modelos tipados (Appointment, servicios, respuestas de la API).
-- [ ] `src/services/api.ts` tipado (payloads y respuestas).
-- [ ] Alias `@/` configurado si aplica.
-- [ ] `pnpm typecheck` no arroja errores.
-- [ ] `pnpm lint` sin errores.
-- [ ] `pnpm build` compila.
-- [ ] La funcionalidad (reserva, catálogo, mis turnos) queda intacta tras la migración.
+- [x] El código fuente pasa de `.jsx`/`.js` a `.tsx`/`.ts` donde corresponda.
+- [x] Modelos tipados (Appointment, servicios, respuestas de la API).
+- [x] `src/services/api.ts` tipado (payloads y respuestas).
+- [x] Alias `@/` configurado si aplica.
+- [x] `pnpm typecheck` no arroja errores.
+- [x] `pnpm lint` sin errores.
+- [x] `pnpm build` compila.
+- [x] La funcionalidad (reserva, catálogo, mis turnos) queda intacta tras la migración.
 
 ## Fuera de alcance
 

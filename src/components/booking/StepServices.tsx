@@ -1,11 +1,17 @@
 import { Check, MoveRight } from 'lucide-react'
-import { useServices } from '../../hooks/useServices'
+import { useServices } from '@/hooks/useServices'
 
-function formatPrice(n) {
+function formatPrice(n: number): string {
   return n.toLocaleString('es-AR')
 }
 
-export default function StepServices({ selected, onToggle, onNext }) {
+interface StepServicesProps {
+  selected: string[]
+  onToggle: (typeId: string) => void
+  onNext: () => void
+}
+
+export default function StepServices({ selected, onToggle, onNext }: StepServicesProps) {
   const { categories, loading } = useServices()
 
   if (loading) {
@@ -94,7 +100,7 @@ export default function StepServices({ selected, onToggle, onNext }) {
           className="font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-8 py-3.5 rounded-full bg-primary text-background hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 cursor-pointer"
         >
           Siguiente
-          <MoveRight className="h-4 w-4 animate-bounce" style={{ animationDuration: "2.5s" }} />
+          <MoveRight className="h-4 w-4 animate-bounce" style={{ animationDuration: '2.5s' }} />
         </button>
       </div>
     </div>

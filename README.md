@@ -16,11 +16,11 @@ sistema de reservas de turnos online, sin necesidad de crear cuenta.
 ## Stack
 
 - [React 19](https://react.dev) + [Vite](https://vite.dev) (SPA)
-- [React Router v7](https://reactrouter.com) — rutas `/`, `/reserva`, `/mis-turnos`
+- [React Router v7](https://reactrouter.com) — rutas `/` y `/mis-turnos`
 - [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) — formulario y validación del paso de datos
 - [Tailwind CSS 4](https://tailwindcss.com) — estilos vía plugin de Vite
 - [Lucide React](https://lucide.dev) — íconos
-- Fuentes self-hosteadas con [@fontsource](https://fontsource.org) (Fraunces + Nunito Sans variables)
+- TypeScript (strict) en todo `src/`
 
 No hay base de datos ni backend propio: el frontend consume una API REST externa.
 
@@ -72,9 +72,10 @@ src/
 ├── context/           # Estado global liviano (servicios seleccionados)
 ├── hooks/             # Custom hooks (ej. useServices)
 ├── lib/               # Utilidades (token de reserva anónima)
-├── pages/             # LandingPage, BookingPage, MyBookingsPage
+├── pages/             # LandingPage, MyBookingsPage
 ├── router/            # Configuración de React Router (lazy loading por ruta)
-├── services/          # Cliente HTTP contra la API
+├── services/          # Cliente HTTP tipado contra la API
+├── types/             # Interfaces TypeScript compartidas
 └── index.css          # Tokens de diseño y estilos globales (Tailwind 4)
 ```
 
