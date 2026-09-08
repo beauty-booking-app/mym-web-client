@@ -1,6 +1,6 @@
 # 10 · Landing scroll único + reserva y catálogo
 
-**Estado:** propuesta (pendiente de aprobación)
+**Estado:** implementado
 
 ## Contexto
 

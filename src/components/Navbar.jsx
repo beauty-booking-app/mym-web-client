@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Navbar() {
   return (
     <nav
@@ -6,16 +8,16 @@ export default function Navbar() {
       aria-label="Navegación principal"
     >
       <div className="flex items-center justify-between gap-4 px-[6%] sm:px-[8%] h-16 sm:h-20">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="font-display text-2xl sm:text-3xl font-medium tracking-wide cursor-pointer"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           MyM
-        </a>
+        </Link>
         <div className="flex items-center gap-4">
-          <a
-            href="/mis-turnos"
+          <Link
+            to="/mis-turnos"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm font-semibold rounded-full min-h-11 min-w-11 cursor-pointer"
             style={{
               color: 'var(--foreground)',
@@ -32,9 +34,9 @@ export default function Navbar() {
             }
           >
             MIS TURNOS
-          </a>
-          <a
-            href="/reserva"
+          </Link>
+          <Link
+            to="/#reserva"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm font-bold rounded-full min-h-11 min-w-11 cursor-pointer"
             style={{
               backgroundColor: 'var(--primary)',
@@ -49,7 +51,7 @@ export default function Navbar() {
             }
           >
             RESERVAR
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

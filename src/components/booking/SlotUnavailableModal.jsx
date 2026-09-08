@@ -56,7 +56,7 @@ export default function SlotUnavailableModal({ open, onReschedule, onCancel }) {
         <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={onReschedule}
-            className="flex-1 font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-6 py-3.5 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors cursor-pointer"
+            className="flex-1 font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-6 py-3.5 rounded-full bg-primary text-background hover:bg-primary/90 transition-colors cursor-pointer"
           >
             Elegir otro turno
           </button>

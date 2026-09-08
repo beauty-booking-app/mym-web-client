@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import heroImg from '../assets/hero.webp'
 import { ArrowDown } from "lucide-react";
 
@@ -89,8 +90,8 @@ export default function Hero() {
             className="reveal flex flex-wrap gap-4 mt-2"
             style={{ transitionDelay: '300ms' }}
           >
-            <a
-              href="/reserva"
+            <Link
+              to="/#reserva"
               className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full min-h-11 min-w-11"
               style={{
                 backgroundColor: 'var(--primary)',
@@ -105,7 +106,7 @@ export default function Hero() {
               }
             >
               Reservá tu turno
-            </a>
+            </Link>
 
             <a
               href="#catalogo"

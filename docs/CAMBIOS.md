@@ -91,3 +91,16 @@
 - Actualizado `src/components/PreFooterBanner.jsx`: texto "Reservá tu turno y viví la experiencia MyM", CTA dorado.
 - Actualizado `src/components/Footer.jsx`: alt "MyM", textos premium, dirección "Buenos Aires", handle `@MyM`, crédito "MyM Salón de belleza".
 - Eliminadas todas las referencias a "Tammi", "barrio", "como en casa" y "calidez de casa".
+
+## 10 · Landing scroll único + reserva y catálogo
+
+- Creado `src/components/BookingSection.jsx`: la reserva pasa a ser una **sección** (ancla `#reserva`) dentro de la landing, reutilizando el wizard `booking/*` (StepServices → StepDateTime → StepClient → StepConfirm) y el manejo de errores (401/400/409, `SlotUnavailable`). "Volver al inicio" hace scroll al tope en lugar de navegar a otra ruta.
+- Eliminado `src/pages/BookingPage.jsx` y su import lazy: la reserva ahora vive dentro de la landing.
+- Actualizado `src/pages/LandingPage.jsx`: se integra `<BookingSection />` entre `About` y `PreFooterBanner`.
+- Actualizado `src/router/AppRouter.jsx`: eliminada la ruta `/reserva`; `ScrollToTop` ahora resuelve hashes (`/#reserva`) con `scrollIntoView({ behavior: 'smooth' })`. Se mantienen `/#` y `/mis-turnos`.
+- Actualizado `src/components/Navbar.jsx`: logo MyM y botones pasan a `react-router` `Link`; RESERVAR apunta a `/#reserva`.
+- Actualizado `src/components/Hero.jsx`: CTA principal apunta a `/#reserva` (ancla de scroll), se mantiene el de "servicios" a `#catalogo`.
+- Rediseñado `src/components/ServiceCatalog.jsx`: se reemplaza el sistema de **tabs** por un **grid de tarjetas elegantes** agrupadas por categoría con selección múltiple; el CTA "Reservar turno" apunta a `/#reserva` y se deshabilita sin servicios seleccionados.
+- Actualizado `src/components/PreFooterBanner.jsx`: CTA "Reservar turno" pasa a `Link` a `/#reserva`.
+- Agregados tokens `--color-card`/`--color-accent-foreground` en `src/index.css` (usados por el wizard y las tarjetas).
+- Ajustes de dark theme en el wizard: botones primarios `bg-primary text-white` → `text-background`; `bg-white` de confirmación → token card; h1 de pasos → h2 por jerarquía.

@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom'
 import { Check } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useServices } from '../../hooks/useServices'
 
 function formatPrice(n) {
   return n.toLocaleString('es-AR')
 }
 
-export default function StepConfirm({ services, date, time, client, appointment }) {
-  const { allTypes, clearSelectedTypes } = useServices()
+export default function StepConfirm({ services, date, time, client, appointment, onGoHome }) {
+  const { allTypes } = useServices()
   const selectedTypes = allTypes.filter((t) => services.includes(t.id))
   const totalPrice = selectedTypes.reduce((sum, t) => sum + t.price, 0)
 
@@ -27,16 +27,16 @@ export default function StepConfirm({ services, date, time, client, appointment 
         ¡Listo!
       </p>
 
-      <h1 className="font-display text-4xl sm:text-5xl mb-6 leading-tight">
+      <h2 className="font-display text-4xl sm:text-5xl mb-6 leading-tight">
         ¡Turno confirmado!
-      </h1>
+      </h2>
 
       <p className="text-foreground/70 text-lg mb-10 max-w-md mx-auto">
         Te esperamos, {client.name}. Tu turno ya está reservado.
       </p>
 
       {appointment?.humanId && (
-        <div className="mb-8 border border-border rounded-2xl p-6 bg-white text-left">
+        <div className="mb-8 border border-border rounded-2xl p-6" style={{ backgroundColor: 'var(--card)' }}>
           <div className="mb-3">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-wide text-foreground/50 mb-0.5">
@@ -47,7 +47,7 @@ export default function StepConfirm({ services, date, time, client, appointment 
               </p>
             </div>
           </div>
-          <p className="text-foreground/60 text-sm pl-16">
+          <p className="text-foreground/60 text-sm pl-4">
             Guardá este código para consultar tu turno en{' '}
             <Link to="/mis-turnos" className="text-primary font-semibold hover:underline">
               Mis turnos
@@ -57,7 +57,7 @@ export default function StepConfirm({ services, date, time, client, appointment 
       )}
 
       {/* Resumen */}
-      <div className="border border-border rounded-2xl p-8 text-left space-y-4 bg-card bg-white">
+      <div className="border border-border rounded-2xl p-8 text-left space-y-4" style={{ backgroundColor: 'var(--card)' }}>
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/50 mb-2">
             Servicios
@@ -100,13 +100,12 @@ export default function StepConfirm({ services, date, time, client, appointment 
         </div>
       </div>
 
-      <Link
-        to="/"
-        onClick={clearSelectedTypes}
-        className="bg-white mt-10 font-mono text-[10px] uppercase tracking-wide font-semibold px-10 py-4 rounded-full border border-border text-foreground/70 hover:text-foreground hover:border-foreground transition-colors inline-flex items-center"
+      <button
+        onClick={onGoHome}
+        className="mt-10 font-mono text-[10px] uppercase tracking-wide font-semibold px-10 py-4 rounded-full border border-border text-foreground/70 hover:text-foreground hover:border-foreground transition-colors inline-flex items-center cursor-pointer"
       >
         Volver al inicio
-      </Link>
+      </button>
     </div>
   )
 }

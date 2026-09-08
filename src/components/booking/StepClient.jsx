@@ -30,9 +30,9 @@ export default function StepClient({ client, onChange, onNext, onBack, submittin
       <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-2">
         Paso 03
       </p>
-      <h1 className="font-display text-3xl sm:text-4xl mb-2">
+      <h2 className="font-display text-3xl sm:text-4xl mb-2">
         Decinos quién sos
-      </h1>
+      </h2>
       <p className="text-foreground/70 text-sm mb-10">
         Así nos acordamos de vos cuando vengas.
       </p>
@@ -135,7 +135,7 @@ export default function StepClient({ client, onChange, onNext, onBack, submittin
           <button
             type="submit"
             disabled={!isValid || submitting}
-            className="font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-8 py-3.5 rounded-full bg-primary text-white hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 cursor-pointer"
+            className="font-mono text-[10px] sm:text-xs uppercase tracking-wide font-semibold px-8 py-3.5 rounded-full bg-primary text-background hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center gap-2 cursor-pointer"
           >
             {submitting ? 'Reservando…' : 'Confirmar'}
           </button>

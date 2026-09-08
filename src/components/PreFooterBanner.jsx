@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 
 export default function PreFooterBanner() {
@@ -14,8 +15,8 @@ export default function PreFooterBanner() {
           </h2>
         </div>
         <div className="lg:col-span-4 lg:text-right">
-          <a
-            href="/reserva"
+          <Link
+            to="/#reserva"
             aria-label="Reservar un turno en MyM Salón de belleza"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-sm font-semibold transition-colors"
             style={{
@@ -31,7 +32,7 @@ export default function PreFooterBanner() {
           >
             Reservar turno
             <MoveRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

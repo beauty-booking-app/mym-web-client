@@ -9,6 +9,8 @@
   --color-background: #0f0f0f;
   --color-foreground: #ffffff;
   --color-foreground-muted: #a0a0a0;
+  --color-card: #1a1a1a;
+  --color-accent-foreground: #0f0f0f;
   --color-border: #2a2a2a;
   --font-display: "Playfair Display", serif;
 
@@ -24,6 +26,7 @@
   --background: #0f0f0f;
   --foreground: #ffffff;
   --foreground-muted: #a0a0a0;
+  --card: #1a1a1a;
   --border: #2a2a2a;
 
   scroll-padding-top: 80px;
