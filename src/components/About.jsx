@@ -5,17 +5,17 @@ const CARDS = [
   {
     icon: Scissors,
     title: 'Peluquería',
-    desc: 'Cortes, tratamientos y color para grandes y chicos. Te asesoramos con onda y sin apuros.',
+    desc: 'Cortes, tratamientos y color para grandes y chicos. Asesoramiento experto y resultados impecables.',
   },
   {
     icon: Palette,
     title: 'Manicura',
-    desc: 'Uñas semipermanentes, kapping y soft gel. Un ratito de mimo para tus manos.',
+    desc: 'Uñas semipermanentes, kapping y soft gel. Cuidado de detalle para tus manos.',
   },
   {
     icon: Heart,
-    title: 'Buen ambiente',
-    desc: 'Un lugar donde se charla, se ríe y se pasa un buen rato. Te recibimos como en casa.',
+    title: 'Atención premium',
+    desc: 'Trato cálido y profesional. Cada visita es una experiencia pensada para vos.',
   },
 ]
 
@@ -73,7 +73,7 @@ export default function About() {
                 transitionDelay: '100ms',
               }}
           >
-            Un salón de barrio, con calidez de casa
+            Excelencia en cada detalle
           </h2>
         </div>
 
@@ -86,9 +86,9 @@ export default function About() {
               transitionDelay: '200ms',
             }}
           >
-            Más que cortar el pelo o hacerte las uñas, queremos que te sientas bien.
-            Por eso acá no hay apuros: te escuchamos, te aconsejamos y te cuidamos mientras
-            charlamos de la vida, nos reímos un rato y te preparamos un café.
+            En MyM transformar tu imagen es un placer. Cuidamos cada detalle para que
+            te sientas segura y renovada: te escuchamos, te aconsejamos y te
+            ofrecemos un espacio pensado para tu bienestar.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -97,12 +97,13 @@ export default function About() {
                 key={card.title}
                 className="reveal lift-card flex flex-col gap-3 p-6 rounded-2xl"
                 style={{
-                  backgroundColor: '#fff',
+                  backgroundColor: 'var(--secondary)',
+                  border: '1px solid var(--border)',
                   transitionDelay: `${300 + i * 100}ms`,
                 }}
               >
-                <div className="h-11 w-11 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <card.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                <div className="h-11 w-11 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--primary)' }}>
+                  <card.icon className="h-5 w-5" style={{ color: 'var(--background)' }} strokeWidth={1.5} />
                 </div>
                 <h3
                   className="font-display text-xl mb-2"

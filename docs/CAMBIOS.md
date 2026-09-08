@@ -69,7 +69,7 @@
 - Creado `src/components/booking/SlotUnavailableModal.jsx`: modal que informa que el turno no está disponible y ofrece dos opciones — "Elegir otro turno" (vuelve al paso 1 del stepper) o "Volver al inicio" (redirige a la landing).
 - Actualizado `src/pages/BookingPage.jsx`: `handleConfirm` ahora valida la disponibilidad con `validateSlot` antes de llamar a `createAppointment`. Si la validación falla con `SlotUnavailable`, abre el modal. Al reprogramar se limpian fecha/hora y se vuelve al paso 1. Al elegir volver al inicio se limpian los servicios seleccionados y se navega a `/`.
 
-## 09 · Performance: code splitting y limpieza
+## 09a · Performance: code splitting y limpieza
 
 - Actualizado `src/router/AppRouter.jsx`: `BookingPage` y `MyBookingsPage` ahora se cargan con `React.lazy` + `Suspense`. El JS inicial baja de 116,5 KB a 82,5 KB gzip (-29%); el bundle del flujo de reserva (React Hook Form + Zod) solo se descarga en `/reserva`.
 - Limpiado `src/services/api.js`: eliminado código muerto del mock (`delay`, `MOCK_SERVICES`) que quedaba tras el early return de la llamada real (además referenciaba identificadores inexistentes); aplanado el condicional `if (BASE_URL)` que siempre era verdadero.
@@ -79,3 +79,15 @@
 - Ajustado el logo del footer en `src/components/Footer.jsx` para que sea responsive (`w-full max-w-50` en la columna, `max-w-36 sm:max-w-44` en la imagen).
 - Self-hosteadas las fuentes con `@fontsource-variable/fraunces` y `@fontsource-variable/nunito-sans` (pnpm): eliminados los links a fonts.googleapis.com/gstatic de `index.html` (render-blocking, ~330 ms); importados en `src/main.jsx` y actualizados `--font-display`/`--font-body` en `src/index.css` a las familias `* Variable`. Solo estilos normales (no se usan cursivas) con subsets por `unicode-range`.
 - Convertida `src/assets/hero.png` (566 KB) a `hero.webp` (131 KB, calidad 80) y actualizado el import en `src/components/Hero.jsx`.
+
+## 09b · Cambio de identidad MyM
+
+- Actualizado `index.html`: título y meta description a **MyM**, carga de Google Fonts (Playfair Display + Plus Jakarta Sans) vía link preconnect.
+- Actualizados los tokens en `src/index.css` a la paleta negro + dorado: fondo `#0f0f0f`, cards `#1a1a1a`, acento `#e2a872` (light `#f4d3b4`), texto `#ffffff`/`#a0a0a0`, borde `#2a2a2a`. Tipografías: `--font-display: "Playfair Display"` y `--font-body: "Plus Jakarta Sans"`.
+- Quitados los imports self-hosted `@fontsource-variable/fraunces` y `@fontsource-variable/nunito-sans` de `src/main.jsx` (las fuentes ahora vienen de Google Fonts).
+- Actualizado `src/components/Navbar.jsx`: agregado wordmark "MyM"; botones "MIS TURNOS" y "RESERVAR" en estilo oscuro, CTA con fondo dorado y texto oscuro.
+- Actualizado `src/components/Hero.jsx`: overlay oscuro, textos premium ("Belleza que se nota"), CTA dorado, botón secundario estilo outline oscuro.
+- Actualizado `src/components/About.jsx`: título "Excelencia en cada detalle", textos premium, cards con fondo token `--secondary` y borde.
+- Actualizado `src/components/PreFooterBanner.jsx`: texto "Reservá tu turno y viví la experiencia MyM", CTA dorado.
+- Actualizado `src/components/Footer.jsx`: alt "MyM", textos premium, dirección "Buenos Aires", handle `@MyM`, crédito "MyM Salón de belleza".
+- Eliminadas todas las referencias a "Tammi", "barrio", "como en casa" y "calidez de casa".

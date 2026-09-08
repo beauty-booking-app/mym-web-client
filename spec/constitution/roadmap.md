@@ -9,10 +9,13 @@
 5. **05 · Footer** — Footer con grilla 4 columnas y barra inferior. (`spec/features/05-footer/`)
 6. **006 · Booking engine** — Wizard full-screen de 3 pasos: servicios → fecha/hora → datos, con confirmación visual. (`spec/features/06-booking-engine/`)
 7. **07 · Reserva anónima conectada al backend** — firma del `X-Client-Token` (JWT HS256 con `VITE_CLIENT_TOKEN_SECRET`), envío de los datos del cliente al crear la cita, y conexión del wizard con el backend real (manejo de errores 401/400/409). (`spec/features/07-reserva-anonima-backend/`)
+8. **08 · Mis turnos** — Página `/mis-turnos` para consultar el estado de un turno con el código de seguimiento (`humanId`), y cancelar/reprogramar con verificación por contacto. Alineado con backend feature 009 (endpoints públicos). (`spec/features/08-mis-turnos/`)
+9. **09 · Cambio de identidad MyM** — Rebranming a MyM, textos premium/sobrios, paleta negro + dorado y tipografías Playfair Display + Plus Jakarta Sans. (`spec/features/09-cambio-identidad/`)
 
 ## Siguiente 🔜
 
-8. **08 · Mis turnos** — Página `/mis-turnos` para consultar el estado de un turno con el código de seguimiento (`humanId`), y cancelar/reprogramar con verificación por contacto. Alineado con backend feature 009 (endpoints públicos). (`spec/features/08-mis-turnos/`)
+10. **10 · Landing scroll único + reserva y catálogo** — Landing que navega por scroll con reserva integrada como sección y catálogo en grid de tarjetas. (`spec/features/10-landing-scroll-unico/`)
+11. **11 · Migración JS/JSX → TypeScript** — Renombrado a `.tsx`/`.ts`, tipado de modelos y `api.ts`, `pnpm typecheck` en verde. (`spec/features/11-migracion-typescript/`)
 
 ## Backlog / ideas 💡
 

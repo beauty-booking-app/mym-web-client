@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: hsl(14, 52%, 56%);
-  --color-primary-hover: hsl(14, 52%, 46%);
-  --color-secondary: hsl(32 35% 92%);
-  --color-accent: hsl(90, 22%, 50%);
-  --color-background: hsl(30, 33%, 97%);
-  --color-foreground: hsl(25, 35%, 22%);
-  --color-foreground-muted: hsl(25, 20%, 45%);
-  --color-border: hsl(30, 15%, 88%);
-  --font-display: "Fraunces Variable", serif;
+  --color-primary: #e2a872;
+  --color-primary-hover: #c98f5f;
+  --color-primary-light: #f4d3b4;
+  --color-secondary: #1a1a1a;
+  --color-accent: #e2a872;
+  --color-background: #0f0f0f;
+  --color-foreground: #ffffff;
+  --color-foreground-muted: #a0a0a0;
+  --color-border: #2a2a2a;
+  --font-display: "Playfair Display", serif;
 
-  --font-body: "Nunito Sans Variable", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
 }
 
 :root {
-  --primary: hsl(14, 52%, 56%);
-  --primary-hover: hsl(14, 52%, 46%);
-  --secondary: hsl(32 35% 92%);
-  --accent: hsl(90, 22%, 50%);
-  --background: hsl(30, 33%, 97%);
-  --foreground: hsl(25, 35%, 22%);
-  --foreground-muted: hsl(25, 20%, 45%);
-  --border: hsl(30, 15%, 88%);
+  --primary: #e2a872;
+  --primary-hover: #c98f5f;
+  --primary-light: #f4d3b4;
+  --secondary: #1a1a1a;
+  --accent: #e2a872;
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --foreground-muted: #a0a0a0;
+  --border: #2a2a2a;
 
   scroll-padding-top: 80px;
   font-family: var(--font-body);

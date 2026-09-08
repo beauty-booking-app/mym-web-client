@@ -1,6 +1,6 @@
 # 09 · Cambio de identidad MyM — Plan
 
-**Estado:** propuesta (pendiente de aprobación)
+**Estado:** implementado
 
 ## Objetivo técnico
 

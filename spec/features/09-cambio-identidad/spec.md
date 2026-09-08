@@ -1,6 +1,6 @@
 # 09 · Cambio de identidad MyM
 
-**Estado:** propuesta (pendiente de aprobación)
+**Estado:** implementado
 
 ## Contexto
 

@@ -14,13 +14,13 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-3 w-full max-w-50 mx-auto lg:mx-0">
           <img
             src={logo}
-            alt="Tammi"
+            alt="MyM"
             className="h-auto w-full max-w-36 sm:max-w-44"
           />
 
           <p className="text-sm leading-relaxed text-center">
-            Un salón de barrio donde te sentís como en casa. Corte,
-            tratamiento, color y uñas con cariño y paciencia.
+            Excelencia en cortes, tratamientos, color y uñas, con un trato
+            cuidado y pensado para vos.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-3">
               <MapPin className="h-4 w-4 text-primary" strokeWidth={1.5} />
-              <span>Av. Principal 1234<br />Tu barrio</span>
+              <span>Av. Principal 1234<br />Buenos Aires</span>
               </li>
             <li className="flex items-center gap-3">
               <Clock className="h-4 w-4 text-primary" strokeWidth={1.5} />
@@ -88,7 +88,7 @@ export default function Footer() {
                 aria-label="Seguinos en Instagram"
                 className="text-sm hover:text-primary transition-colors"
               >
-                @Tammi
+                @MyM
               </a>
               
             </li>
@@ -112,7 +112,7 @@ export default function Footer() {
       {/* Barra inferior */}
       <div className="border-t border-primary/20 pt-8 text-center">
         <p className="text-xs text-foreground">
-          Hecho con amor en Tammi Salón de belleza · 2026
+          MyM Salón de belleza · 2026
         </p>
       </div>
     </footer>

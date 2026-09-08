@@ -46,7 +46,7 @@ export default function Hero() {
         className="absolute inset-0 z-11"
         style={{
           background:
-            'linear-gradient(to right, hsl(32 35% 92%) 30%, transparent 100%)',
+            'linear-gradient(to right, rgba(15,15,15,0.95) 45%, rgba(15,15,15,0.6) 100%)',
         }}
       />
 
@@ -60,7 +60,7 @@ export default function Hero() {
               color: 'var(--primary)',
             }}
           >
-            Tu salón de confianza · Peluquería y manicura
+            Tu salón premium · Peluquería y manicura
           </p>
 
           <h1
@@ -70,9 +70,9 @@ export default function Hero() {
               fontSize: "clamp(2.75rem, 7vw, 6rem)",
             }}
           >
-            Un rato para vos,
+            Elegí estar bien.
             <br />
-            <span className="text-primary">entre vecinos y amigos.</span>
+            <span className="text-primary">Belleza que se nota.</span>
           </h1>
 
           <p
@@ -81,8 +81,8 @@ export default function Hero() {
               color: 'var(--foreground-muted)',
             }}
           >
-            Vení a cortarte el pelo, hacerte las uñas o darte un mimo.
-            Acá se charla, se ríe y se pasa un buen rato mientras te cuidamos.
+            Un espacio pensado para tu cuidado: cortes, tratamientos, color y
+            uñas con excelencia y atención personalizada.
           </p>
 
           <div
@@ -91,10 +91,18 @@ export default function Hero() {
           >
             <a
               href="/reserva"
-              className="bg-primary-hover hover:bg-primary inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-white rounded-full min-h-11 min-w-11"
+              className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full min-h-11 min-w-11"
               style={{
+                backgroundColor: 'var(--primary)',
+                color: 'var(--background)',
                 transition: 'background-color 0.2s',
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = 'var(--primary-light)')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = 'var(--primary)')
+              }
             >
               Reservá tu turno
             </a>
@@ -105,7 +113,7 @@ export default function Hero() {
               style={{
                 color: 'var(--foreground)',
                 border: '2px solid var(--border)',
-                backgroundColor: 'rgba(255,255,255,0.6)',
+                backgroundColor: 'transparent',
                 backdropFilter: 'blur(4px)',
                 transition: 'border-color 0.2s',
               }}
