@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { useServices } from '@/hooks/useServices'
-import { Plus, Check, MoveRight } from 'lucide-react'
 
 function formatPrice(n: number): string {
   return n.toLocaleString('es-AR')
 }
 
 export default function ServiceCatalog() {
-  const { categories, loading, selectedTypes, toggleType } = useServices()
+  const { categories, loading } = useServices()
   const sectionRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -37,7 +35,7 @@ export default function ServiceCatalog() {
       <section id="catalogo" className="py-20 sm:py-28 px-[6%] sm:px-[8%]">
         <div className="h-3 w-40 bg-foreground/10 rounded mb-4" />
         <div className="h-10 w-96 max-w-full bg-foreground/10 rounded mb-12" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="h-72 bg-foreground/10 rounded-2xl" />
           ))}
@@ -67,74 +65,40 @@ export default function ServiceCatalog() {
               className="reveal font-display font-medium text-4xl sm:text-5xl leading-[1.05] text-balance max-w-2xl"
               style={{ fontFamily: 'var(--font-display)', transitionDelay: '100ms' }}
             >
-              Elegí tus servicios y reservá en un click
+              Conocé todo lo que ofrecemos
             </h2>
           </div>
           <p className="reveal max-w-sm text-foreground/70 text-base" style={{ transitionDelay: '200ms' }}>
-            Cuatro rubros premium. Seleccioná uno o combiná varios; el turno se arma con lo que elegís.
+            Peluquería y belleza de uñas. Descubrí cada servicio con su precio y duración.
           </p>
         </div>
 
-        {/* Grid de tarjetas por categoría */}
-        <div className="space-y-16">
-          {categories.map((cat) => (
-            <div key={cat.id} className="reveal">
-              <div className="flex items-baseline justify-between flex-wrap gap-2 mb-8">
-                <h3
-                  className="font-display text-2xl sm:text-3xl"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  {cat.label}
-                </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-                  {cat.pillar}
-                </p>
-              </div>
+        {/* Grid de cards por categoría */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {categories.map((cat, i) => (
+            <article
+              key={cat.id}
+              className="reveal flex flex-col rounded-2xl border border-border bg-card p-6 sm:p-8 lift-card"
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <h3
+                className="font-display text-2xl sm:text-3xl"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                {cat.label}
+              </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="h-px bg-border/60 my-5" />
+
+              <ul className="space-y-6">
                 {cat.services.flatMap((svc) =>
-                  svc.types.map((type) => {
-                    const isSelected = selectedTypes.includes(type.id)
-                    return (
-                      <button
-                        key={type.id}
-                        onClick={() => toggleType(type.id)}
-                        aria-label={`${isSelected ? 'Quitar' : 'Seleccionar'} ${type.name}`}
-                        aria-pressed={isSelected}
-                        className={`group flex flex-col text-left p-6 rounded-2xl border transition-all duration-300 lift-card cursor-pointer min-h-44 ${
-                          isSelected
-                            ? 'border-primary bg-secondary/80'
-                            : 'border-border bg-card hover:border-primary/60 hover:bg-secondary/40'
-                        }`}
-                        style={{
-                          backgroundColor: isSelected ? 'var(--secondary)' : 'var(--background)',
-                        }}
-                      >
-                        <div className="flex items-start justify-between gap-3 mb-4">
-                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-                            {svc.name}
-                          </span>
-                          <span
-                            className={`h-8 w-8 shrink-0 rounded-full border flex items-center justify-center transition-colors ${
-                              isSelected ? 'border-primary bg-primary' : 'border-border group-hover:border-primary'
-                            }`}
-                          >
-                            {isSelected ? (
-                              <Check className="h-4 w-4 text-background" strokeWidth={2.5} />
-                            ) : (
-                              <Plus className="h-4 w-4 text-primary" strokeWidth={2} />
-                            )}
-                          </span>
-                        </div>
-
-                        <p className="font-display text-xl mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+                  svc.types.map((type) => (
+                    <li key={type.id} className="flex flex-col gap-1.5">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <p className="font-display text-lg leading-snug" style={{ fontFamily: 'var(--font-display)' }}>
                           {type.name}
                         </p>
-                        <p className="text-sm text-foreground/60 leading-relaxed mb-4 line-clamp-3">
-                          {type.description}
-                        </p>
-
-                        <div className="mt-auto flex items-center justify-between gap-4 pt-3 border-t border-border/60">
+                        <div className="flex flex-col items-end gap-1 shrink-0">
                           <span className="font-mono text-sm text-primary font-semibold">
                             ${formatPrice(type.price)}
                           </span>
@@ -142,43 +106,18 @@ export default function ServiceCatalog() {
                             {type.durationMinutes} min
                           </span>
                         </div>
-                      </button>
-                    )
-                  }),
+                      </div>
+                      {type.description && (
+                        <p className="text-sm text-foreground/60 leading-relaxed">
+                          {type.description}
+                        </p>
+                      )}
+                    </li>
+                  )),
                 )}
-              </div>
-            </div>
+              </ul>
+            </article>
           ))}
-        </div>
-
-        {/* Footer de selección */}
-        <div className="mt-16 reveal flex items-center justify-between gap-4 flex-wrap p-6 rounded-2xl border border-border bg-secondary">
-          <p className="font-mono text-xs font-semibold uppercase tracking-wide text-foreground/90 px-2">
-            {selectedTypes.length} servicio{selectedTypes.length !== 1 ? 's' : ''} seleccionado{selectedTypes.length !== 1 ? 's' : ''}
-          </p>
-          <Link
-            to="/#reserva"
-            className={`inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full min-h-11 min-w-11 transition-all cursor-pointer ${
-              selectedTypes.length === 0 ? 'opacity-50 pointer-events-none' : ''
-            }`}
-            style={{
-              backgroundColor: 'var(--primary)',
-              color: 'var(--background)',
-              transition: 'background-color 0.2s',
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary-light)')
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary)')
-            }
-            aria-disabled={selectedTypes.length === 0}
-          >
-            <span className="flex gap-2 items-center">
-              Reservar turno
-              <MoveRight className="h-4 w-4" />
-            </span>
-          </Link>
         </div>
       </div>
     </section>

@@ -1,5 +1,12 @@
 # Registro de cambios
 
+## 12 · Catálogo: cards por categoría
+
+- Rediseñado `src/components/ServiceCatalog.tsx`: cada categoría pasa de ser un título de sección con grid de 4 tarjetas a una **card única** con el label como header, línea divisoria y la lista de todos sus `ServiceType` (nombre, descripción, precio y duración).
+- Grid responsive: `grid-cols-1 sm:grid-cols-2` (1 card por fila en mobile, 2 en `sm+`), cards con `bg-card`, borde y `lift-card`.
+- Animación de entrada suave por scroll: `.reveal` + `IntersectionObserver` existente con `transitionDelay` escalonado (`i * 100ms`) por card; skeleton de loading ajustado al nuevo grid.
+- Validado `pnpm build`, `pnpm lint` y `pnpm typecheck` en verde.
+
 ## 11 · Migración JS/JSX → TypeScript
 
 - Creado `src/types/`: `models.ts` (Service, ServiceType, Category, Appointment, estados), `api.ts` (payloads/respuestas de la API + clase `ApiError` con códigos `NotFound`/`ContactMismatch`/`CannotCancel`/`CannotReschedule`/`SlotUnavailable`) y `context.ts` (valor tipado del `ServicesContext`). Shapes alineados con los schemas del backend (`mym-api-backend/app/schemas/*`, camelCase).

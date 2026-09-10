@@ -13,6 +13,7 @@
 9. **09 · Cambio de identidad MyM** — Rebranming a MyM, textos premium/sobrios, paleta negro + dorado y tipografías Playfair Display + Plus Jakarta Sans. (`spec/features/09-cambio-identidad/`)
 10. **10 · Landing scroll único + reserva y catálogo** — Landing que navega por scroll con reserva integrada como sección (`#reserva`) y catálogo en grid de tarjetas elegantes. (`spec/features/10-landing-scroll-unico/`)
 11. **11 · Migración JS/JSX → TypeScript** — Renombrado a `.tsx`/`.ts`, tipado de modelos y `api.ts`, `pnpm typecheck` en verde, ESLint configurado para TS (typescript-eslint). (`spec/features/11-migracion-typescript/`)
+12. **12 · Catálogo: cards por categoría** — Cada categoría pasa a ser una card (label como header, línea divisoria y lista de servicios), grid 1 col en mobile / 2 en `sm+`, entrada suave escalonada. (`spec/features/12-catalogo-card-por-categoria/`)
 
 ## Siguiente 🔜
 
