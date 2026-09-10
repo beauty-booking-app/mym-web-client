@@ -97,7 +97,7 @@ export default function StepDateTime({
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">Día</p>
         </div>
 
-        <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
+        <div className="flex flex-wrap gap-3 py-2">
           {availableDates.map((key) => {
             const d = new Date(key + 'T12:00:00')
             const isSelected = date === key
@@ -109,7 +109,7 @@ export default function StepDateTime({
               <button
                 key={key}
                 onClick={() => onDate(key)}
-                className={`shrink-0 w-20 py-5 rounded-2xl border flex flex-col items-center gap-1 transition-all min-h-22 lift-card cursor-pointer ${
+                className={`w-20 py-5 rounded-2xl border flex flex-col items-center gap-1 transition-all min-h-22 lift-card cursor-pointer ${
                   isSelected
                     ? 'border-primary bg-primary/5'
                     : 'border-border bg-card'
