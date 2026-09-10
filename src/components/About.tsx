@@ -9,7 +9,7 @@ const CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
   },
   {
     icon: Palette,
-    title: 'Manicura',
+    title: 'Belleza de uñas',
     desc: 'Uñas semipermanentes, kapping y soft gel. Cuidado de detalle para tus manos.',
   },
   {
@@ -33,7 +33,7 @@ export default function About() {
             entry.target.classList.add('revealed')
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
-                ;(entry.target as HTMLElement).style.transitionDelay = '0ms'
+                ; (entry.target as HTMLElement).style.transitionDelay = '0ms'
               })
             })
           }

@@ -96,22 +96,20 @@ export default function BookingSection() {
               <React.Fragment key={s.id}>
                 <div className="flex items-center gap-3">
                   <span
-                    className={`font-mono text-[10px] h-7 w-7 flex items-center justify-center rounded-full border transition-colors ${
-                      step > s.id
+                    className={`font-mono text-[10px] h-7 w-7 flex items-center justify-center rounded-full border transition-colors ${step > s.id
                         ? 'border-accent bg-accent text-accent-foreground'
                         : step === s.id
                           ? 'border-primary text-primary bg-primary/5'
                           : 'border-border text-foreground/40'
-                    }`}
+                      }`}
                     aria-current={step === s.id ? 'step' : undefined}
                   >
                     {step > s.id ? <Check className="h-3.5 w-3.5" /> : String(s.id).padStart(2, '0')}
                   </span>
 
                   <span
-                    className={`font-mono text-[10px] uppercase tracking-wide hidden sm:inline ${
-                      step === s.id ? 'text-foreground' : 'text-foreground/40'
-                    }`}
+                    className={`font-mono text-[10px] uppercase tracking-wide hidden sm:inline ${step === s.id ? 'text-foreground' : 'text-foreground/40'
+                      }`}
                   >
                     {s.label}
                   </span>

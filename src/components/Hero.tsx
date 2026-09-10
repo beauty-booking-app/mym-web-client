@@ -61,7 +61,7 @@ export default function Hero() {
               color: 'var(--primary)',
             }}
           >
-            Tu salón premium · Peluquería y manicura
+            Tu salón premium · Peluquería y Belleza de uñas
           </p>
 
           <h1

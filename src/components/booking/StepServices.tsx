@@ -38,17 +38,11 @@ export default function StepServices({ selected, onToggle, onNext }: StepService
         {categories.map((cat) => (
           <div key={cat.id}>
             <div className="flex items-baseline gap-4 mb-5 border-b border-border pb-3">
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-                {cat.pillar}
-              </span>
               <h2 className="font-display text-xl text-foreground">{cat.label}</h2>
             </div>
 
             {cat.services.map((svc) => (
               <div key={svc.id} className="mb-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/40 mb-3">
-                  {svc.name}
-                </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {svc.types.map((type) => {
                     const isSelected = selected.includes(type.id)
@@ -56,11 +50,10 @@ export default function StepServices({ selected, onToggle, onNext }: StepService
                       <button
                         key={type.id}
                         onClick={() => onToggle(type.id)}
-                        className={`group text-left p-5 rounded-2xl border transition-all min-h-11 lift-card cursor-pointer ${
-                          isSelected
-                            ? 'border-primary bg-primary/5'
-                            : 'border-border bg-card hover:border-primary/50'
-                        }`}
+                        className={`group text-left p-5 rounded-2xl border transition-all min-h-11 lift-card cursor-pointer ${isSelected
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border bg-card hover:border-primary/50'
+                          }`}
                         aria-label={`${isSelected ? 'Quitar' : 'Seleccionar'} ${type.name}`}
                         aria-pressed={isSelected}
                       >
@@ -72,9 +65,8 @@ export default function StepServices({ selected, onToggle, onNext }: StepService
                             </p>
                           </div>
                           <span
-                            className={`h-5 w-5 shrink-0 rounded-full border flex items-center justify-center transition-colors ${
-                              isSelected ? 'border-accent bg-accent' : 'border-border'
-                            }`}
+                            className={`h-5 w-5 shrink-0 rounded-full border flex items-center justify-center transition-colors ${isSelected ? 'border-accent bg-accent' : 'border-border'
+                              }`}
                           >
                             {isSelected && <Check className="h-3 w-3 text-accent-foreground" />}
                           </span>
