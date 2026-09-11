@@ -1,4 +1,5 @@
 import { getClientToken } from '@/lib/clientToken'
+import { Config } from '@/lib/config'
 import type { Appointment, Service } from '@/types/models'
 import {
   ApiError,
@@ -11,7 +12,7 @@ import {
   type ValidateSlotResponse,
 } from '@/types/api'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://mym-api-backend.vercel.app'
+const BASE_URL = Config.apiUrl
 
 // Lee el cuerpo de error que devuelve el backend (puede no ser JSON válido).
 async function readErrorBody(res: Response): Promise<ApiErrorBody | null> {

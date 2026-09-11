@@ -12,6 +12,7 @@
 - Tarjetas del bloque "Sobre nosotros" con `--gradient-gold-metallic` de fondo (texto e ícono invertidos a oscuro para contraste).
 - Footer con `--gradient-gold-metallic` de fondo; textos, títulos, íconos y barra inferior pasan a colores oscuros para mantener contraste (hover a `--foreground`).
 - Lista de servicios de cada card del catálogo en grilla `grid-flow-col grid-rows-3`: máximo 3 ítems por columna, el resto fluye a una segunda columna (ej. Tratamientos con 5 → 3 + 2).
+- URL base del backend movida de la variable pública `VITE_API_URL` a `src/lib/config.ts` (`Config.apiUrl`): en dev apunta a `http://localhost:8000` y en build al backend productivo `https://mym-api-backend.vercel.app`, sin prefijo público.
 
 ## 13 · Fusión "Sobre nosotros" + catálogo de servicios
 
