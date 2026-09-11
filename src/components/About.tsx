@@ -58,28 +58,26 @@ export default function About() {
           {CARDS.map((card, i) => (
             <div
               key={card.title}
-              className="reveal lift-card relative z-70 flex flex-col items-center text-center gap-3 p-4 sm:p-6 rounded-2xl bg-primary/20"
+              className="reveal lift-card relative z-70 flex flex-col items-center text-center gap-3 p-4 sm:p-6 rounded-2xl"
               style={{
-                backdropFilter: 'blur(4px)',
+                backgroundImage: 'var(--gradient-gold-metallic)',
+                border: '1px solid rgba(0, 0, 0, 0.25)',
                 transitionDelay: `${i * 100}ms`,
               }}
             >
-              <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-full flex items-center justify-center mb-3 sm:mb-4" style={{ backgroundColor: 'var(--primary)' }}>
-                <card.icon className="h-4 w-4 sm:h-5 sm:w-5" style={{ color: 'var(--background)' }} strokeWidth={1.5} />
+              <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-full flex items-center justify-center mb-3 sm:mb-4" style={{ backgroundColor: 'var(--background)' }}>
+                <card.icon className="h-4 w-4 sm:h-5 sm:w-5" style={{ color: 'var(--primary)' }} strokeWidth={1.5} />
               </div>
               <h3
-                className="font-display text-base sm:text-xl mb-2"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'var(--foreground)',
-                }}
+                className="text-lg sm:text-xl mb-2"
+                style={{ color: 'var(--background)' }}
               >
                 {card.title}
               </h3>
 
               <p
                 className="hidden sm:block text-xs sm:text-sm leading-relaxed"
-                style={{ color: 'var(--foreground-muted)' }}
+                style={{ color: 'rgba(0, 0, 0, 0.72)' }}
               >
                 {card.desc}
               </p>
@@ -105,7 +103,7 @@ export default function About() {
                 Nuestros servicios
               </p>
               <h2
-                className="reveal font-display font-medium text-4xl sm:text-5xl leading-[1.05] text-balance max-w-2xl"
+                className="reveal font-display font-medium text-4xl sm:text-5xl leading-[1.05] text-balance"
                 style={{ fontFamily: 'var(--font-display)', transitionDelay: '100ms' }}
               >
                 Conocé todo lo que ofrecemos
@@ -114,7 +112,7 @@ export default function About() {
                 className="reveal mt-6 max-w-2xl text-base sm:text-lg leading-relaxed"
                 style={{ color: 'var(--foreground-muted)', transitionDelay: '200ms' }}
               >
-                Peluquería y belleza de uñas. Elegí el servicio que mejor se adapta a vos.
+                Peluquería y belleza de uñas: servicios que se adaptan a vos.
               </p>
             </div>
           </div>
@@ -131,12 +129,12 @@ export default function About() {
               {categories.map((cat, i) => (
                 <article
                   key={cat.id}
-                  className="reveal lift-card flex flex-col p-6 sm:p-8 rounded-2xl border border-border bg-card"
+                  className="reveal lift-card flex flex-col p-7 rounded-2xl border border-border bg-card"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <h3
-                    className="font-display text-2xl sm:text-3xl"
-                    style={{ fontFamily: 'var(--font-display)' }}
+                    className="text-2xl sm:text-3xl"
+                    style={{ color: 'var(--foreground)' }}
                   >
                     {cat.label}
                   </h3>
@@ -150,9 +148,9 @@ export default function About() {
                     </p>
                   )}
 
-                  <div className="h-px bg-border/60 my-5" />
+                  <div className="h-px  my-2" />
 
-                  <ul className="space-y-2.5">
+                  <ul className="grid grid-flow-col grid-rows-3 gap-x-6 gap-y-2.5">
                     {cat.services.flatMap((svc) => svc.types).map((type) => (
                       <li
                         key={type.id}

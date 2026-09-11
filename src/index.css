@@ -1,33 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #e2a872;
-  --color-primary-hover: #c98f5f;
-  --color-primary-light: #f4d3b4;
-  --color-secondary: #1a1a1a;
-  --color-accent: #e2a872;
-  --color-background: #0f0f0f;
-  --color-foreground: #ffffff;
+  --color-primary: #c9a227;
+  --color-primary-hover: #e6c865;
+  --color-primary-light: #e6c865;
+  --color-secondary: #0a0a0a;
+  --color-accent: #c9a227;
+  --color-background: #000000;
+  --color-foreground: #f5f5f5;
   --color-foreground-muted: #a0a0a0;
-  --color-card: #1a1a1a;
-  --color-accent-foreground: #0f0f0f;
-  --color-border: #2a2a2a;
+  --color-card: #121212;
+  --color-accent-foreground: #000000;
+  --color-border: rgba(255, 255, 255, 0.1);
   --font-display: "Playfair Display", serif;
 
-  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-body: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter",
+    "Plus Jakarta Sans", sans-serif;
 }
 
 :root {
-  --primary: #e2a872;
-  --primary-hover: #c98f5f;
-  --primary-light: #f4d3b4;
-  --secondary: #1a1a1a;
-  --accent: #e2a872;
-  --background: #0f0f0f;
-  --foreground: #ffffff;
+  --primary: #c9a227;
+  --primary-hover: #e6c865;
+  --primary-light: #e6c865;
+  --secondary: #0a0a0a;
+  --accent: #c9a227;
+  --background: #000000;
+  --foreground: #f5f5f5;
   --foreground-muted: #a0a0a0;
-  --card: #1a1a1a;
-  --border: #2a2a2a;
+  --card: #121212;
+  --border: rgba(255, 255, 255, 0.1);
+
+  /* DESIGN.md extended tokens */
+  --bg-primary: #000000;
+  --bg-surface-dark: #0a0a0a;
+  --bg-surface-card: #121212;
+  --bg-surface-glass: rgba(18, 18, 18, 0.75);
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a0a0;
+  --text-gold: #c9a227;
+  --accent-gold: #c9a227;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-gold: rgba(201, 162, 39, 0.4);
+  --gradient-black-gold: linear-gradient(135deg, #000000 0%, #1a1508 50%, #c9a227 100%);
+  --gradient-gold-metallic: linear-gradient(135deg, #f5e6a8 0%, #c9a227 50%, #997819 100%);
+  --gradient-dark-card: linear-gradient(180deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%);
+  --shadow-soft-dark: 0 20px 40px rgba(0, 0, 0, 0.8);
+  --shadow-gold-glow: 0 10px 30px rgba(201, 162, 39, 0.15);
+  --glass-blur: blur(20px);
 
   scroll-padding-top: 80px;
   font-family: var(--font-body);
@@ -51,10 +70,28 @@ body {
   margin: 0;
 }
 
-h1, h2, h3, h4 {
+h1 {
   font-family: var(--font-display);
   color: var(--foreground);
-  line-height: 1.15;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: var(--font-display);
+  color: var(--foreground);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+h3, h4 {
+  font-family: var(--font-body);
+  color: var(--foreground);
+  line-height: 1.25;
+  font-weight: 500;
 }
 
 /* Scroll reveal animation */

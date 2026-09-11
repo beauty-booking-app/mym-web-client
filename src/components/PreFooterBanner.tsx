@@ -18,16 +18,16 @@ export default function PreFooterBanner() {
           <Link
             to="/#reserva"
             aria-label="Reservar un turno en MyM Salón de belleza"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-sm font-semibold transition-colors"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-xs font-semibold uppercase tracking-[0.1em] transition-[filter]"
             style={{
-              backgroundColor: 'var(--primary)',
+              backgroundImage: 'var(--gradient-gold-metallic)',
               color: 'var(--background)',
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary-light)')
+              (e.currentTarget.style.filter = 'brightness(1.1)')
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary)')
+              (e.currentTarget.style.filter = 'none')
             }
           >
             Reservar turno

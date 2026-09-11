@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logo from '@/assets/logo-blanco.png'
 
 export default function Navbar() {
   return (
@@ -8,22 +9,18 @@ export default function Navbar() {
       aria-label="Navegación principal"
     >
       <div className="flex items-center justify-between gap-4 px-[6%] sm:px-[8%] h-16 sm:h-20">
-        <Link
-          to="/"
-          className="font-display text-2xl sm:text-3xl font-medium tracking-wide cursor-pointer"
-          style={{ fontFamily: 'var(--font-display)' }}
-        >
-          MyM
+        <Link to="/" aria-label="MyM — Inicio" className="cursor-pointer">
+          <img src={logo} alt="MyM" className="h-9 sm:h-12 w-auto" />
         </Link>
         <div className="flex items-center gap-4">
           <Link
             to="/mis-turnos"
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm font-semibold rounded-full min-h-11 min-w-11 cursor-pointer"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-xs font-semibold uppercase tracking-[0.1em] rounded-full min-h-11 min-w-11 cursor-pointer"
             style={{
               color: 'var(--foreground)',
               border: '2px solid var(--border)',
               backgroundColor: 'transparent',
-              backdropFilter: 'blur(4px)',
+              backdropFilter: 'var(--glass-blur)',
               transition: 'border-color 0.2s, color 0.2s',
             }}
             onMouseEnter={(e) =>
@@ -37,17 +34,17 @@ export default function Navbar() {
           </Link>
           <Link
             to="/#reserva"
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 text-sm font-bold rounded-full min-h-11 min-w-11 cursor-pointer"
+            className="hidden sm:inline-flex items-center justify-center px-6 sm:px-8 py-3 text-xs font-bold uppercase tracking-[0.1em] rounded-full min-h-11 min-w-11 cursor-pointer"
             style={{
-              backgroundColor: 'var(--primary)',
+              backgroundImage: 'var(--gradient-gold-metallic)',
               color: 'var(--background)',
-              transition: 'background-color 0.2s',
+              transition: 'filter 0.2s',
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary-light)')
+              (e.currentTarget.style.filter = 'brightness(1.1)')
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = 'var(--primary)')
+              (e.currentTarget.style.filter = 'none')
             }
           >
             RESERVAR

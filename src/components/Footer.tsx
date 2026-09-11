@@ -7,7 +7,11 @@ export default function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="py-16 sm:py-20 px-[6%] sm:px-[8%] bg-primary/20"
+      className="py-16 sm:py-20 px-[6%] sm:px-[8%]"
+      style={{
+        backgroundImage: 'var(--gradient-gold-metallic)',
+        color: 'var(--background)',
+      }}
     >
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
         {/* Col 1 — Marca */}
@@ -28,7 +32,7 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h3
             className="text-xl font-bold"
-            style={{ fontFamily: 'var(--font-display)' }}
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--background)' }}
           >
             Servicios
           </h3>
@@ -52,18 +56,18 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h3
             className="text-xl font-bold"
-            style={{ fontFamily: 'var(--font-display)' }}
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--background)' }}
           >
             Contacto
           </h3>
 
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-3">
-              <MapPin className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <MapPin className="h-4 w-4 text-background" strokeWidth={1.5} />
               <span>Av. Principal 1234<br />Buenos Aires</span>
             </li>
             <li className="flex items-center gap-3">
-              <Clock className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <Clock className="h-4 w-4 text-background" strokeWidth={1.5} />
               <span>Lun a Sáb: 9 a 19 hs</span>
             </li>
           </ul>
@@ -73,33 +77,33 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h3
             className="text-xl font-bold"
-            style={{ fontFamily: 'var(--font-display)' }}
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--background)' }}
           >
             Redes
           </h3>
 
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <Mail className="h-4 w-4 text-background" strokeWidth={1.5} />
               <a
                 href="https://instagram.com/mpeluqueria"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Seguinos en Instagram"
-                className="text-sm hover:text-primary transition-colors"
+                className="text-sm hover:text-foreground transition-colors"
               >
                 @MyM
               </a>
             </li>
 
             <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <Phone className="h-4 w-4 text-background" strokeWidth={1.5} />
               <a
                 href="https://wa.me/541155551234"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Escribinos por WhatsApp"
-                className="text-sm hover:text-primary transition-colors"
+                className="text-sm hover:text-foreground transition-colors"
               >
                 541155551234
               </a>
@@ -109,8 +113,8 @@ export default function Footer() {
       </div>
 
       {/* Barra inferior */}
-      <div className="border-t border-primary/20 pt-8 text-center">
-        <p className="text-xs text-foreground">
+      <div className="border-t border-black/20 pt-8 text-center">
+        <p className="text-xs text-background/80">
           MyM Salón de belleza · 2026
         </p>
       </div>

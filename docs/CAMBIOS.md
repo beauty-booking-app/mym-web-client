@@ -1,5 +1,18 @@
 # Registro de cambios
 
+## 14 · Design System (DESIGN.md)
+
+- Aplicados los tokens de `DESIGN.md` en `src/index.css` (`@theme` y `:root`): fondo `#000000`, superficie `#0A0A0A`, card `#121212`, dorado `#C9A227` (hover/light `#E6C865`), texto `#F5F5F5`, gris `#A0A0A0`, borde `rgba(255,255,255,0.1)`.
+- Tipografía: body ahora `SF Pro Display / -apple-system / Inter` (se reemplaza Plus Jakarta Sans por Inter en la Google Fonts de `index.html`); display se mantiene Playfair Display.
+- Agregados tokens extendidos de DESIGN.md: `--bg-surface-glass`, `--text-gold`, `--accent-gold`, `--border-subtle`, `--border-gold`, gradientes (`--gradient-gold-metallic`, `--gradient-dark-card`, `--gradient-black-gold`), sombras (`--shadow-soft-dark`, `--shadow-gold-glow`) y `--glass-blur: blur(20px)`.
+- Aplicado `--glass-blur` a los elementos glass: tarjetas del About, botón "MIS TURNOS" (Navbar) y botón secundario del Hero (antes `blur(4px)`).
+- Escala tipográfica de DESIGN.md: `h1` uppercase + `letter-spacing 0.05em` semibold; `h2` semibold + `0.02em`; `h3`/`h4` en font-body (Inter/SF Pro) weight 500. Se quita Playfair de los títulos de card (tarjetas del About y categorías del catálogo).
+- Botones CTA (Navbar, Hero, PreFooterBanner): 12px uppercase + `tracking-[0.1em]`.
+- Cards del catálogo con padding `p-7` (28px, card chassis de DESIGN.md).
+- Tarjetas del bloque "Sobre nosotros" con `--gradient-gold-metallic` de fondo (texto e ícono invertidos a oscuro para contraste).
+- Footer con `--gradient-gold-metallic` de fondo; textos, títulos, íconos y barra inferior pasan a colores oscuros para mantener contraste (hover a `--foreground`).
+- Lista de servicios de cada card del catálogo en grilla `grid-flow-col grid-rows-3`: máximo 3 ítems por columna, el resto fluye a una segunda columna (ej. Tratamientos con 5 → 3 + 2).
+
 ## 13 · Fusión "Sobre nosotros" + catálogo de servicios
 
 - Fusionadas las secciones `ServiceCatalog` y `About` en una sola: `src/components/About.tsx` ahora contiene, en orden, el bloque "Sobre nosotros" (header, párrafo y las 3 tarjetas) y el bloque "Nuestros servicios" (`id="catalogo"`) con las 4 categorías del backend como tarjetas con **label + descripción**.

@@ -83,17 +83,17 @@ export default function Hero() {
           >
             <Link
               to="/#reserva"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full min-h-11 min-w-11"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs font-semibold uppercase tracking-[0.1em] rounded-full min-h-11 min-w-11"
               style={{
-                backgroundColor: 'var(--primary)',
+                backgroundImage: 'var(--gradient-gold-metallic)',
                 color: 'var(--background)',
-                transition: 'background-color 0.2s',
+                transition: 'filter 0.2s',
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = 'var(--primary-light)')
+                (e.currentTarget.style.filter = 'brightness(1.1)')
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = 'var(--primary)')
+                (e.currentTarget.style.filter = 'none')
               }
             >
               Reservá tu turno
@@ -101,12 +101,12 @@ export default function Hero() {
 
             <a
               href="#catalogo"
-              className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold rounded-full min-h-11 min-w-11"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs font-semibold uppercase tracking-[0.1em] rounded-full min-h-11 min-w-11"
               style={{
                 color: 'var(--foreground)',
                 border: '2px solid var(--border)',
                 backgroundColor: 'transparent',
-                backdropFilter: 'blur(4px)',
+                backdropFilter: 'var(--glass-blur)',
                 transition: 'border-color 0.2s',
               }}
               onMouseEnter={(e) =>
