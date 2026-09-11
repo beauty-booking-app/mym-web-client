@@ -11,7 +11,7 @@ import {
   type ValidateSlotResponse,
 } from '@/types/api'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://api-backend-rho-vert.vercel.app'
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://mym-api-backend.vercel.app'
 
 // Lee el cuerpo de error que devuelve el backend (puede no ser JSON válido).
 async function readErrorBody(res: Response): Promise<ApiErrorBody | null> {
