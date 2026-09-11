@@ -1,5 +1,18 @@
 # Registro de cambios
 
+## 13 · Fusión "Sobre nosotros" + catálogo de servicios
+
+- Fusionadas las secciones `ServiceCatalog` y `About` en una sola: `src/components/About.tsx` ahora contiene, en orden, el bloque "Sobre nosotros" (header, párrafo y las 3 tarjetas) y el bloque "Nuestros servicios" (`id="catalogo"`) con las 4 categorías del backend como tarjetas con **label + descripción**.
+- Quitados **precios y duraciones** de la landing; las tarjetas de categoría muestran solo el texto descriptivo real del backend (`Category.description`).
+- En el bloque "Sobre nosotros" quedan solo las **3 tarjetas** (se quitan el título "Excelencia en cada detalle" y el párrafo); las tarjetas usan el estilo semi-transparente del botón "MIS TURNOS" (fondo `bg-primary/20`, borde `2px solid var(--border)`, `backdropFilter: blur(4px)`).
+- Las tarjetas del bloque "Sobre nosotros" se elevan con margen negativo (`-mt-12 sm:-mt-16`) y sin padding superior, montadas sobre el hero; con `relative z-70` quedan por encima del overlay del hero.
+- Las 3 tarjetas se ven en **3 columnas también en mobile** (`grid-cols-3`, gap y padding reducidos en `sm` inferior para no apretarse).
+- `src/components/ServiceCatalog.tsx` eliminado y removido su uso en `src/pages/LandingPage.tsx`.
+- Se mantienen las anclas `id="servicios"` (sección) y `id="catalogo"` (bloque de servicios); los links de Hero y Footer a `#catalogo` siguen funcionando.
+- Grid de categorías responsive (`grid-cols-1 sm:grid-cols-2`) con `.reveal` + `IntersectionObserver` re-observando los targets al terminar el `loading`, skeleton de carga y scroll-padding existente.
+- Actualizado `spec/features/13-fusion-about-servicios/` (spec, plan, tasks) y movida la feature a "Hecho" en `spec/constitution/roadmap.md`.
+- Validado `pnpm build`, `pnpm lint` y `pnpm typecheck` en verde.
+
 ## 12 · Catálogo: cards por categoría
 
 - Rediseñado `src/components/ServiceCatalog.tsx`: cada categoría pasa de ser un título de sección con grid de 4 tarjetas a una **card única** con el label como header, línea divisoria y la lista de todos sus `ServiceType` (nombre, descripción, precio y duración).

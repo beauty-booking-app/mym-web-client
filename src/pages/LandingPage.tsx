@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
-import ServiceCatalog from '@/components/ServiceCatalog'
 import About from '@/components/About'
 import BookingSection from '@/components/BookingSection'
 import PreFooterBanner from '@/components/PreFooterBanner'
@@ -11,7 +10,6 @@ export default function LandingPage() {
     <>
       <Navbar />
       <Hero />
-      <ServiceCatalog />
       <About />
       <BookingSection />
       <PreFooterBanner />

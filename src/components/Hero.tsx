@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import heroImg from '@/assets/hero.webp'
-import { ArrowDown } from 'lucide-react'
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null)
@@ -54,15 +53,7 @@ export default function Hero() {
       {/* Content grid */}
       <div className="relative z-50 w-full px-[6%] sm:px-[8%] py-20 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center min-h-svh">
         {/* Text column */}
-        <div className="flex flex-col gap-6 max-w-xl">
-          <p
-            className="reveal font-mono text-xs uppercase tracking-[0.25em] text-primary mb-6"
-            style={{
-              color: 'var(--primary)',
-            }}
-          >
-            Tu salón premium · Peluquería y Belleza de uñas
-          </p>
+        <div className="flex flex-col gap-6">
 
           <h1
             className="reveal font-display font-medium text-foreground text-balance leading-tight"
@@ -128,11 +119,6 @@ export default function Hero() {
               Conocé nuestros servicios
             </a>
           </div>
-        </div>
-        {/* Scroll cue */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-foreground/60">Descubrí más</span>
-          <ArrowDown className="h-4 w-4 text-primary animate-bounce" style={{ animationDuration: '2.5s' }} />
         </div>
         {/* Right column — empty, lets the background show through */}
         <div className="hidden lg:block" aria-hidden="true" />
